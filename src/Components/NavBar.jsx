@@ -13,6 +13,13 @@ export const NavBar = () => {
 
   const location = useLocation();
 
+  let baseUrl = `${window.location.protocol}//${window.location.host}`;
+if(baseUrl[baseUrl.length - 1] !== "/"){
+  baseUrl += "/"
+}
+console.log("baseUrl",baseUrl);
+console.log("pathname", location.pathname)
+
   const isHome = location.pathname === "/";
   const isOnAbout = location.pathname.toLowerCase() === "/about";
 
