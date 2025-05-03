@@ -13,11 +13,10 @@ export const NavBar = () => {
 
   const location = useLocation();
 
-  console.log(location.pathname)
+  console.log(location.pathname);
 
-  const isHome = location.pathname === "/"
-  const isOnAbout = location.pathname.toLowerCase() === "/about"
-
+  const isHome = location.pathname === "/";
+  const isOnAbout = location.pathname.toLowerCase() === "/about";
 
   const closeModalAndGoToPage = (page) => {
     handleClose();
@@ -26,21 +25,26 @@ export const NavBar = () => {
 
   const handleOpen = () => {
     setOpen(true);
-
   };
   const handleClose = () => {
     setIsModalFadingOut(true);
     setTimeout(() => {
       setOpen(false);
       setIsModalFadingOut(false);
-
     }, ANIMATION_TIME);
-
   };
 
   return (
     <div className="nav-bar">
       <img className="nav-logo" src={"/katie_logo.png"} />
+      <div className="nav-link-container">
+        <Link className={classNames("nav-link", isHome ? "nav-link-active" : "")} to="/">
+          Home
+        </Link>
+        <Link className={classNames("nav-link", isOnAbout ? "nav-link-active" : "")} to="/about">
+          About
+        </Link>
+      </div>
 
       <div>
         <button className="hamburger-button" onClick={handleOpen}>
@@ -55,23 +59,36 @@ export const NavBar = () => {
           onClose={handleClose}
           aria-labelledby="modal-title"
           aria-describedby="modal-description"
-          className={classNames(
-            "fade-in",
-            isModalFadingOut ? "fade-out" : ""
-          )}
+          className={classNames("fade-in", isModalFadingOut ? "fade-out" : "")}
         >
           <div className="modal-nav">
-            <button onClick={handleClose} className={classNames("x-button","undo-button-styles")}>
+            <button
+              onClick={handleClose}
+              className={classNames("x-button", "undo-button-styles")}
+            >
               <div className="x-symbol"></div>
             </button>
-            <button className={classNames("nav-link", isHome ? "nav-link-active": "")} onClick={() => closeModalAndGoToPage("/")}> Home </button>
-            <button className={classNames("nav-link", isOnAbout ? "nav-link-active": "")} onClick={() => closeModalAndGoToPage("/")} onClick={() => closeModalAndGoToPage("/about")}>
+            <button
+              className={classNames(
+                "side-menu-nav-link",
+                isHome ? "side-menu-nav-link-active" : ""
+              )}
+              onClick={() => closeModalAndGoToPage("/")}
+            >
+              {" "}
+              Home{" "}
+            </button>
+            <button
+              className={classNames(
+                "side-menu-nav-link",
+                isOnAbout ? "side-menu-nav-link-active" : ""
+              )}
+              onClick={() => closeModalAndGoToPage("/")}
+              onClick={() => closeModalAndGoToPage("/about")}
+            >
               {" "}
               About
             </button>
-
-            {/* <Link to="/">Home</Link>
-            <Link to="/about">About</Link> */}
           </div>
         </Modal>
       </div>
