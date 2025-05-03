@@ -1,5 +1,5 @@
 import logo from "./logo.svg";
-import { Routes, Route, Link, BrowserRouter } from "react-router-dom";
+import { Routes, Route, Link, BrowserRouter, HashRouter } from "react-router-dom";
 import { useSearchParams, useNavigate } from 'react-router-dom';
 
 import { Home } from "./Pages/Home";
@@ -21,7 +21,7 @@ if(baseUrl[baseUrl.length - 1] !== "/"){
 }
 console.log(baseUrl);
   return (
-    <BrowserRouter>
+    <HashRouter>
       <NavBar />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -30,7 +30,7 @@ console.log(baseUrl);
 
       </Routes>
       <Footer/>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 
