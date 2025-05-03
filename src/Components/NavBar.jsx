@@ -13,8 +13,6 @@ export const NavBar = () => {
 
   const location = useLocation();
 
-  console.log(location.pathname);
-
   const isHome = location.pathname === "/";
   const isOnAbout = location.pathname.toLowerCase() === "/about";
 
@@ -83,7 +81,6 @@ export const NavBar = () => {
                 "side-menu-nav-link",
                 isOnAbout ? "side-menu-nav-link-active" : ""
               )}
-              onClick={() => closeModalAndGoToPage("/")}
               onClick={() => closeModalAndGoToPage("/about")}
             >
               {" "}
