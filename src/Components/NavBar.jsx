@@ -34,7 +34,7 @@ export const NavBar = () => {
 
   return (
     <div className="nav-bar">
-      <img className="nav-logo" src={"/katie_logo.png"} />
+      <img className="nav-logo" src={"katie_logo.png"} />
       <div className="nav-link-container">
         <Link className={classNames("nav-link", isHome ? "nav-link-active" : "")} to="/">
           Home
