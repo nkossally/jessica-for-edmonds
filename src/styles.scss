@@ -12,6 +12,34 @@ code {
         monospace;
 }
 
+.fade-in {
+    animation: fadeIn .3s ease-in forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.fade-out {
+    animation: fadeOut .3s ease-out forwards;
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
 
 .nav-bar {
     display: flex;
@@ -32,14 +60,14 @@ code {
 }
 
 .hamburger-button {
-	background-color: transparent;
-	color: inherit;
+    background-color: transparent;
+    color: inherit;
     width: fit-content;
-	border: 0;
-	padding: 0;
-	font: inherit;
-	cursor: pointer;
-	outline: inherit;
+    border: 0;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
 }
 
 .hamburger {
@@ -58,14 +86,89 @@ code {
     height: 100%;
 }
 
-.modal-nav{
+.modal-nav {
     height: 100%;
-    width: 300px;
+    width: 40vw;
+
+    @media (max-width: 600px) {
+        width: 100dvw;
+    }
+
     background: white;
 
     position: absolute;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
     top: 0%;
     right: 0%;
+
+
+
+
+}
+
+.undo-button-styles{
+    background-color: transparent;
+    color: inherit;
+    width: fit-content;
+    border: 0;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
+}
+
+.x-symbol {
+
+
+    height: 100px;
+    width: 100px;
+    position: relative;
+}
+
+.x-symbol:after {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    content: "\d7";
+    font-size: 40px;
+    // color: #FFF;
+    line-height: 100px;
+    text-align: center;
+}
+
+.x-button{
+    position: absolute;
+    right: 0;
+    top: 0;
+
+}
+
+.nav-link {
+
+    background-color: transparent;
+    width: fit-content;
+    border: 0;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
+
+    color: #008DD1;
+    font-size: 24px;
+    margin-bottom: 15px;
+
+    &:hover {
+        color: #1A459D;
+        text-decoration: underline;
+    }
+}
+
+.nav-link-active{
+        color: #1A459D;
+        text-decoration: underline;
 }

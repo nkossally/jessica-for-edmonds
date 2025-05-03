@@ -1,25 +1,42 @@
-import { Modal, Box, Typography, Button } from "@mui/material";
-import { Routes, Route, Link, BrowserRouter } from "react-router-dom";
+import { Modal } from "@mui/material";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useState } from "react";
+import classNames from "classnames";
 
-const style = {
-  position: "absolute",
-  display: "flex",
-  "flex-direction": "column",
-  top: "0%",
-  right: "0%",
-//   transform: "translate(-50%, -50%)",
-  width: 400,
-  bgcolor: "background.paper",
-  borderRadius: 2,
-  boxShadow: 24,
-  p: 4,
-};
+const ANIMATION_TIME = 300;
 
 export const NavBar = () => {
   const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const [isModalFadingOut, setIsModalFadingOut] = useState(false);
+
+  const navigate = useNavigate();
+
+  const location = useLocation();
+
+  console.log(location.pathname)
+
+  const isHome = location.pathname === "/"
+  const isOnAbout = location.pathname.toLowerCase() === "/about"
+
+
+  const closeModalAndGoToPage = (page) => {
+    handleClose();
+    navigate(page);
+  };
+
+  const handleOpen = () => {
+    setOpen(true);
+
+  };
+  const handleClose = () => {
+    setIsModalFadingOut(true);
+    setTimeout(() => {
+      setOpen(false);
+      setIsModalFadingOut(false);
+
+    }, ANIMATION_TIME);
+
+  };
 
   return (
     <div className="nav-bar">
@@ -38,12 +55,23 @@ export const NavBar = () => {
           onClose={handleClose}
           aria-labelledby="modal-title"
           aria-describedby="modal-description"
+          className={classNames(
+            "fade-in",
+            isModalFadingOut ? "fade-out" : ""
+          )}
         >
           <div className="modal-nav">
-                   <Link to="/">Home</Link>
-                  <Link to="/about">About</Link> 
-            
-        
+            <button onClick={handleClose} className={classNames("x-button","undo-button-styles")}>
+              <div className="x-symbol"></div>
+            </button>
+            <button className={classNames("nav-link", isHome ? "nav-link-active": "")} onClick={() => closeModalAndGoToPage("/")}> Home </button>
+            <button className={classNames("nav-link", isOnAbout ? "nav-link-active": "")} onClick={() => closeModalAndGoToPage("/")} onClick={() => closeModalAndGoToPage("/about")}>
+              {" "}
+              About
+            </button>
+
+            {/* <Link to="/">Home</Link>
+            <Link to="/about">About</Link> */}
           </div>
         </Modal>
       </div>
