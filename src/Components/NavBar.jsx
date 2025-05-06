@@ -14,11 +14,9 @@ export const NavBar = () => {
   const location = useLocation();
 
   let baseUrl = `${window.location.protocol}//${window.location.host}`;
-if(baseUrl[baseUrl.length - 1] !== "/"){
-  baseUrl += "/"
-}
-console.log("baseUrl",baseUrl);
-console.log("pathname", location.pathname)
+  if (baseUrl[baseUrl.length - 1] !== "/") {
+    baseUrl += "/";
+  }
 
   const isHome = location.pathname === "/";
   const isOnAbout = location.pathname.toLowerCase() === "/about";
@@ -41,12 +39,21 @@ console.log("pathname", location.pathname)
 
   return (
     <div className="nav-bar">
-      <img className="nav-logo" src={"katie_logo.png"} />
+      <img
+        className="nav-logo"
+        src={process.env.PUBLIC_URL + "/" + "katie_logo.png"}
+      />
       <div className="nav-link-container">
-        <Link className={classNames("nav-link", isHome ? "nav-link-active" : "")} to="/">
+        <Link
+          className={classNames("nav-link", isHome ? "nav-link-active" : "")}
+          to="/"
+        >
           Home
         </Link>
-        <Link className={classNames("nav-link", isOnAbout ? "nav-link-active" : "")} to="/about">
+        <Link
+          className={classNames("nav-link", isOnAbout ? "nav-link-active" : "")}
+          to="/about"
+        >
           About
         </Link>
       </div>

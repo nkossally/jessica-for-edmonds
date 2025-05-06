@@ -8,18 +8,12 @@ import { NavBar } from "./Components/NavBar";
 import { Footer } from "./Components/Footer";
 
 function App() {
-  // const [searchParams, setSearchParams] = useSearchParams();
-  // const navigate = useNavigate();
 
-  // console.log(searchParams)
-
-  
 
 let baseUrl = `${window.location.protocol}//${window.location.host}`;
 if(baseUrl[baseUrl.length - 1] !== "/"){
   baseUrl += "/"
 }
-console.log(baseUrl);
   return (
     <HashRouter>
       <NavBar />

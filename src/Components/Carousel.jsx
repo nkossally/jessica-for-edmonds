@@ -15,8 +15,6 @@ export const Carousel = ({ items }) => {
     );
   };
 
-  console.log(process.env.PUBLIC_URL)
-
   return (
     <div className="carousel-container">
       <button className="carousel-button prev" onClick={prevSlide}>
