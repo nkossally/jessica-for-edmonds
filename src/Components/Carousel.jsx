@@ -15,6 +15,8 @@ export const Carousel = ({ items }) => {
     );
   };
 
+  console.log(process.env.PUBLIC_URL)
+
   return (
     <div className="carousel-container">
       <button className="carousel-button prev" onClick={prevSlide}>
@@ -23,7 +25,7 @@ export const Carousel = ({ items }) => {
       
       <div className="carousel-slide">
         <img
-          src={items[currentIndex].imagePath}
+          src={process.env.PUBLIC_URL +  "/" + items[currentIndex].imagePath}
           alt={items[currentIndex].name}
           className="carousel-image"
         />
