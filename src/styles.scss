@@ -58,6 +58,8 @@ code {
     top: 0;
     left: 0;
     z-index: 1;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5), 0 4px 8px rgba(0, 0, 0, 0.3);
+
 
     // position: -webkit-sticky;
     // position: sticky;
@@ -176,7 +178,7 @@ code {
 
 .x-button{
     position: absolute;
-    right: 0;
+    left: 0;
     top: 0;
 
 }
@@ -323,3 +325,16 @@ code {
     align-self: right;
 }
 
+.about-section-one{
+    background: $blue;
+    display: flex;
+    flex-direction: row;
+
+    color: white;
+
+
+}
+
+.half-row{
+    width: 50%;
+}

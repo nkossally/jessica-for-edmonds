@@ -1,5 +1,5 @@
 import { Carousel } from "../Components/Carousel";
-
+import { AboutSectionOne } from "../Components/AboutSectionOne";
 export const Home = () => {
   const carouselItems = [
     { name: "blarg 1", imagePath: "slider-1.png", description: "First slide" },
@@ -14,6 +14,7 @@ export const Home = () => {
   return (
       <div>
         <Carousel items={carouselItems}></Carousel>
+        <AboutSectionOne/>
       </div>
   )
 };
