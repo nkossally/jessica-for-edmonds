@@ -1,6 +1,6 @@
 import { Modal } from "@mui/material";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import classNames from "classnames";
 
 const ANIMATION_TIME = 300;
@@ -19,7 +19,7 @@ export const NavBar = () => {
   }
 
   const isHome = location.pathname === "/";
-  const isOnAbout = location.pathname.toLowerCase() === "/about";
+  const isOnAbout = location.pathname.toLowerCase() === "/platform";
 
   const closeModalAndGoToPage = (page) => {
     handleClose();
@@ -39,33 +39,36 @@ export const NavBar = () => {
 
   return (
     <div className="nav-bar">
-      <img
-        className="nav-logo"
-        src={process.env.PUBLIC_URL + "/" + "katie_logo.png"}
-      />
+      <button className="hamburger-button" onClick={handleOpen}>
+        <div className="hamburger">
+          <div className="hamburger-block"></div>
+          <div className="hamburger-block"></div>
+          <div className="hamburger-block"></div>
+        </div>
+      </button>
+      <div className="nav-logo-container">
+        <img
+          className="nav-logo"
+          src={process.env.PUBLIC_URL + "/" + "zohran-logo.svg"}
+        />
+      </div>
+
       <div className="nav-link-container">
         <Link
           className={classNames("nav-link", isHome ? "nav-link-active" : "")}
           to="/"
         >
-          Home
+          About
         </Link>
         <Link
           className={classNames("nav-link", isOnAbout ? "nav-link-active" : "")}
-          to="/about"
+          to="/platform"
         >
-          About
+          Platform
         </Link>
       </div>
 
       <div>
-        <button className="hamburger-button" onClick={handleOpen}>
-          <div className="hamburger">
-            <div className="hamburger-block"></div>
-            <div className="hamburger-block"></div>
-            <div className="hamburger-block"></div>
-          </div>
-        </button>
         <Modal
           open={open}
           onClose={handleClose}
@@ -88,17 +91,17 @@ export const NavBar = () => {
               onClick={() => closeModalAndGoToPage("/")}
             >
               {" "}
-              Home{" "}
+              About{" "}
             </button>
             <button
               className={classNames(
                 "side-menu-nav-link",
                 isOnAbout ? "side-menu-nav-link-active" : ""
               )}
-              onClick={() => closeModalAndGoToPage("/about")}
+              onClick={() => closeModalAndGoToPage("/platform")}
             >
               {" "}
-              About
+              Platform
             </button>
           </div>
         </Modal>
