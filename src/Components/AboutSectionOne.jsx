@@ -1,12 +1,15 @@
+import classNames from "classnames";
 export const AboutSectionOne = () => {
   return (
     <div className="about-section-one">
-      <div className="half-row">
+      <h1 className={classNames("half-section", "about-section-one-text")}>
         Zohran Mamdani is running for Mayor to lower the cost of living for
         working class New Yorkers.
-      </div>
+      </h1>
 
-      <div className="half-row"></div>
+      <div className="half-section">
+        <img className="about-section-one-image" src={process.env.PUBLIC_URL + "/" + "zohran.avif"} />
+      </div>
     </div>
   );
 };

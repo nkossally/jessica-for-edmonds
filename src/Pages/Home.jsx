@@ -13,7 +13,7 @@ export const Home = () => {
   ];
   return (
       <div>
-        <Carousel items={carouselItems}></Carousel>
+        {/* <Carousel items={carouselItems}></Carousel> */}
         <AboutSectionOne/>
       </div>
   )

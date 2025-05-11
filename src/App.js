@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 
 import { Home } from "./Pages/Home";
 import { Platform } from "./Pages/Platform";
+import { Volunteer } from "./Pages/Volunteer";
 import { NavBar } from "./Components/NavBar";
 import { Footer } from "./Components/Footer";
 
@@ -38,6 +39,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/platform" element={<Platform />} />
+           <Route path="/volunteer" element={<Volunteer />} />
           <Route path="*" element={<Home />} />
         </Routes>
         <Footer />

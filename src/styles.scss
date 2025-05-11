@@ -100,7 +100,7 @@ code {
     height: 5px;
 }
 
-.nav-logo-container{
+.nav-logo-container {
     display: flex;
     position: fixed;
     left: 0;
@@ -144,7 +144,7 @@ code {
 
 }
 
-.undo-button-styles{
+.undo-button-styles {
     background-color: transparent;
     color: inherit;
     width: fit-content;
@@ -176,7 +176,7 @@ code {
     text-align: center;
 }
 
-.x-button{
+.x-button {
     position: absolute;
     left: 0;
     top: 0;
@@ -190,7 +190,7 @@ code {
     border: 0;
     padding: 0;
     font: inherit;
-    font-family: "Union Gothic";
+    font-family: unionGothic;
     cursor: pointer;
     outline: inherit;
 
@@ -209,10 +209,11 @@ code {
     }
 }
 
-.side-menu-nav-link-active{
-        // color: $blue;
-        // text-decoration: underline;
+.side-menu-nav-link-active {
+    // color: $blue;
+    // text-decoration: underline;
 }
+
 .nav-link-container {
     display: flex;
     flex-direction: row;
@@ -228,7 +229,7 @@ code {
     font-size: 14px;
     margin-right: 30px;
     text-decoration: none;
-    font-family: "Union Gothic";
+    font-family: unionGothic;
     letter-spacing: 2px;
     font-weight: 700;
     text-transform: uppercase;
@@ -247,7 +248,7 @@ code {
     color: $yellow;
 }
 
-.carousel-image{
+.carousel-image {
     height: 290px;
     width: 100vw;
 }
@@ -256,20 +257,20 @@ code {
     position: relative;
     max-width: 100%;
     overflow: hidden;
-  }
-  
-  .carousel-slide {
+}
+
+.carousel-slide {
     display: flex;
     transition: transform 0.5s ease-in-out;
-  }
-  
-  .carousel-image {
+}
+
+.carousel-image {
     width: 100%;
     object-fit: cover;
     height: 100%;
-  }
-  
-  .carousel-button {
+}
+
+.carousel-button {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -280,22 +281,22 @@ code {
     cursor: pointer;
     font-size: 24px;
     z-index: 100;
-  }
-  
-  .prev {
-    left: 10px;
-  }
-  
-  .next {
-    right: 10px;
-  }
-  
-  /* Optional: styling for when you hover on buttons */
-  .carousel-button:hover {
-    background-color: rgba(0, 0, 0, 0.8);
-  }
+}
 
-.footer-container{
+.prev {
+    left: 10px;
+}
+
+.next {
+    right: 10px;
+}
+
+/* Optional: styling for when you hover on buttons */
+.carousel-button:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.footer-container {
     height: 170px;
     width: 100vw;
     display: flex;
@@ -322,19 +323,55 @@ code {
         position: relative;
 
     }
+
     align-self: right;
 }
 
-.about-section-one{
+.about-section-one {
     background: $blue;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: fit-content;
 
-    color: white;
 
+    @media (min-width: 1000px) {
+        flex-direction: row;
+        height: 600px;
+    }
 
 }
 
-.half-row{
-    width: 50%;
+.half-section {
+    width: 60%;
+    display: flex;
+    justify-content: center;
+
+    @media (min-width: 1000px) {
+        width: 50%;
+    }
+}
+
+.about-section-one-image {
+    height: 600px;
+
+    @media (min-width: 1000px) {}
+}
+
+.about-section-one-text {
+    font-size: 30px;
+    margin: 0px 0px 0px 50px;
+
+    font-family: unionGothic;
+    color: white;
+
+    @media (min-width: 1000px) {
+        font-size: 50px;
+    }
+}
+
+.form{
+    width: 625px;
+    border: 1px solid $yellow;
 }

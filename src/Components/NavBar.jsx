@@ -20,6 +20,7 @@ export const NavBar = () => {
 
   const isHome = location.pathname === "/";
   const isOnAbout = location.pathname.toLowerCase() === "/platform";
+  const isOnVolunteer = location.pathname.toLowerCase() === "/volunteer";
 
   const closeModalAndGoToPage = (page) => {
     handleClose();
@@ -66,6 +67,15 @@ export const NavBar = () => {
         >
           Platform
         </Link>
+        <Link
+          className={classNames(
+            "nav-link",
+            isOnVolunteer ? "nav-link-active" : ""
+          )}
+          to="/volunteer"
+        >
+          Volunteer
+        </Link>
       </div>
 
       <div>
@@ -102,6 +112,16 @@ export const NavBar = () => {
             >
               {" "}
               Platform
+            </button>
+            <button
+              className={classNames(
+                "side-menu-nav-link",
+                isOnAbout ? "side-menu-nav-link-active" : ""
+              )}
+              onClick={() => closeModalAndGoToPage("/volunteer")}
+            >
+              {" "}
+              Volunteer
             </button>
           </div>
         </Modal>
