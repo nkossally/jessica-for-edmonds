@@ -1,18 +1,17 @@
 import React, { useState } from "react";
 
+import {Input} from "./Input"
+
 export const SignupForm = () => {
-  const [formData, setFormData] = useState({ name: "", number: "" });
-  const [ name, setName ] = useState("")
-  const [ number, setNumber ] = useState("")
-  const [ email, setEmail ] = useState("")
-  const [ address, setAddress ] = useState("")
+  const [formData, setFormData] = useState({ name: "", number: "", email: "", address: "" });
 
-
-  const [ errors, setErrors ]= useState({})
+  const [errors, setErrors] = useState({});
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    const newFormData = { ...formData, [name]: value };
+    setFormData(newFormData)
+    validateForm(newFormData)
   };
 
   const handleSubmit = (e) => {
@@ -20,20 +19,36 @@ export const SignupForm = () => {
     setFormData({ name: "", number: "" });
   };
 
+  const validateForm = (newFormData) =>{
+    validateName(newFormData)
+  }
+
+  const validateName = (newFormData) =>{
+    if(!newFormData.name){
+      setErrors((prev) => ({...prev, name: "Please enter your full name"}))
+    } else {
+      setErrors((prev) => ({...prev, name: ""}))
+
+    }
+  }
+
   return (
     <form className="form" onSubmit={handleSubmit}>
-      <div className="">
-        <label className="">Name</label>
+      <Input name={"name"} error={errors.name} label={"Full Name"} type={"text"} value={formData.name} handleChange={handleChange} required={true}/>
+      <div className="input-element-container">
+        <label className="input-label">Full Name</label>
         <input
           type="text"
           name="name"
+          className="input-element"
           value={formData.name}
           onChange={handleChange}
           required
         />
       </div>
-        <div className="">
-        <label className="">Number</label>
+      {errors.name && <div classname="form-error">{errors.name}</div>}
+      <div className="">
+        <label className="">Phone Number</label>
         <input
           type="text"
           name="number"
@@ -42,7 +57,7 @@ export const SignupForm = () => {
           required
         />
       </div>
-        <div className="">
+      <div className="">
         <label className="">Email</label>
         <input
           type="text"
@@ -52,8 +67,8 @@ export const SignupForm = () => {
           required
         />
       </div>
-        <div className="">
-        <label className="">Address</label>
+      <div className="">
+        <label className="">Your Address</label>
         <input
           type="text"
           name="address"
