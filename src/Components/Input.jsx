@@ -10,6 +10,9 @@ export const Input = ({ label, error, type, name, value, handleChange , required
         onChange={handleChange}
         required={required}
       />
+        <div classname="form-error">{error}</div>
+
     </div>
+
   );
 };

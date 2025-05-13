@@ -371,24 +371,24 @@ code {
     }
 }
 
-.form{
+.form {
     width: 625px;
     border: 1px solid $yellow;
 }
 
-.input-element-container{
+.input-element-container {
     display: flex;
     flex-direction: column;
     margin: 10px 20px;
-
+    height: 60px;
 }
 
-.input-element{
+.input-element {
     border: 1px solid #999999;
 
 }
 
-.input-label{
+.input-label {
     color: #2519D2;
     font-size: 17px;
     font-family: sans-serif;
@@ -397,12 +397,15 @@ code {
 
 }
 
-.form-error{
+.form-error {
     // color: #EB6864;
     color: #EC6864;
+    height: 10px;
+    min-width: 1px;
+    border: 2opx solid black;
 }
 
-.volunteer-container{
+.volunteer-container {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -410,7 +413,7 @@ code {
 
 }
 
-.volunteer-title{
+.volunteer-title {
     font-family: unionGothic;
     font-size: 40px;
     color: $blue;
@@ -418,8 +421,12 @@ code {
     text-align: center;
 }
 
-.volunteer-text{
+.volunteer-text {
     width: 625px;
     text-align: center;
     margin: 0px 0px 20px 0px;
+}
+
+.submit-volunteer {
+    // background-color: 
 }

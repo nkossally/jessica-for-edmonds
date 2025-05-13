@@ -35,48 +35,10 @@ export const SignupForm = () => {
   return (
     <form className="form" onSubmit={handleSubmit}>
       <Input name={"name"} error={errors.name} label={"Full Name"} type={"text"} value={formData.name} handleChange={handleChange} required={true}/>
-      <div className="input-element-container">
-        <label className="input-label">Full Name</label>
-        <input
-          type="text"
-          name="name"
-          className="input-element"
-          value={formData.name}
-          onChange={handleChange}
-          required
-        />
-      </div>
-      {errors.name && <div classname="form-error">{errors.name}</div>}
-      <div className="">
-        <label className="">Phone Number</label>
-        <input
-          type="text"
-          name="number"
-          value={formData.number}
-          onChange={handleChange}
-          required
-        />
-      </div>
-      <div className="">
-        <label className="">Email</label>
-        <input
-          type="text"
-          name="email"
-          value={formData.email}
-          onChange={handleChange}
-          required
-        />
-      </div>
-      <div className="">
-        <label className="">Your Address</label>
-        <input
-          type="text"
-          name="address"
-          value={formData.address}
-          onChange={handleChange}
-          required
-        />
-      </div>
+      <Input name={"number"} error={errors.number} label={"Phone Number"} type={"text"} value={formData.number} handleChange={handleChange} required={true}/>
+      <Input name={"email"} error={errors.email} label={"Email"} type={"text"} value={formData.email} handleChange={handleChange} required={true}/>
+      <Input name={"address"} error={errors.address} label={"Your Address"} type={"text"} value={formData.address} handleChange={handleChange} required={true}/>
+
       <button type="submit" className="">
         Submit
       </button>
