@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-
+import { useState } from "react";
+import classNames from "classnames";
 import { Input } from "./Input";
 
 export const SignupForm = () => {
@@ -14,9 +14,17 @@ export const SignupForm = () => {
 
   const handleChange = (validationCallback) => (e) => {
     const { name, value } = e.target;
-    const newFormData = { ...formData, [name]: value };
+    let newFormData = { ...formData, [name]: value };
+    if (name === "number") {
+      const numbersOnly = value.replace(/\D/g, "");
+      const formatted = formatPhoneNumber(numbersOnly);
+      newFormData = { ...formData, number: formatted };
+    }
+
     setFormData(newFormData);
-    validationCallback(value);
+    if (validationCallback) {
+      validationCallback(value);
+    }
   };
 
   const handleSubmit = (e) => {
@@ -25,37 +33,36 @@ export const SignupForm = () => {
   };
 
   const validateForm = () => {
-    validateName(formData);
+    return validateName(formData.name) && validateEmail(formData.email) && validateNumber(formData.number)
   };
 
   const validateName = (nameInput) => {
     if (!nameInput) {
-      setErrors((prev) => ({ ...prev, name: "Please enter your full name" }));
+      setErrors((prev) => ({ ...prev, name: "Please enter your full name." }));
     } else {
       setErrors((prev) => ({ ...prev, name: "" }));
     }
   };
 
   const validateNumber = (numberInput) => {
-    const formatted = formatPhoneNumber(numberInput);
-    console.log(formatted);
-    console.log("numberInput", numberInput);
-    if (!numberInput) {
+    const numbersOnly = numberInput.replace(/\D/g, "");
+
+    if (!numbersOnly) {
       setErrors((prev) => ({
         ...prev,
         number: "Please enter a valid phone number.",
       }));
       return;
     }
-    if (numberInput.length !== 10 && numberInput.length !== 11) {
+    if (numbersOnly.length !== 10 && numbersOnly.length !== 11) {
       setErrors((prev) => ({
         ...prev,
         number: "Please enter a valid phone number.",
       }));
       return;
     }
-    if(numberInput.length === 11 && numberInput[0] !== "1"){
-            setErrors((prev) => ({
+    if (numbersOnly.length === 11 && numbersOnly[0] !== "1") {
+      setErrors((prev) => ({
         ...prev,
         number: "Please enter a valid phone number.",
       }));
@@ -68,24 +75,38 @@ export const SignupForm = () => {
   };
 
   const formatPhoneNumber = (numberInput) => {
+    numberInput = numberInput.slice(0, 11);
+    let formatted = numberInput;
 
-        let formatted = numberInput;
+    if (numberInput.length > 0) {
+      formatted = `(${numberInput.slice(0, 3)}`;
+    }
+    if (numberInput.length > 3) {
+      formatted += `) ${numberInput.slice(3, 6)}`;
+    }
+    if (numberInput.length > 6) {
+      formatted += `-${numberInput.slice(6)}`;
+    }
+    if (numberInput.length === 11 && numberInput[0] === "1") {
+      formatted = `1 (${numberInput.slice(1, 4)}) ${numberInput.slice(
+        4,
+        7
+      )}-${numberInput.slice(7, 11)}`;
+    }
 
-        if (numberInput.length > 0) {
-            formatted = `(${numberInput.slice(0, 3)}`;
-        }
-        if (numberInput.length > 3) {
-            formatted += `) ${numberInput.slice(3, 6)}`;
-        }
-        if (numberInput.length > 6) {
-            formatted += `-${numberInput.slice(6)}`;
-        }
-        if (numberInput.length === 11 && numberInput[0] === "1"){
-            formatted = `1 (${numberInput.slice(1, 4)}) ${numberInput.slice(4, 7)}-${numberInput.slice(7, 11)}`;
-        }
+    return formatted;
+  };
 
-        return formatted;
-    };
+  const validateEmail = (emailInput) => {
+    console.log("emailInput", emailInput)
+    if (!emailInput || !emailInput.includes("@") || !emailInput.includes(".")) {
+      console.log(!emailInput , !emailInput.includes("@") , !emailInput.includes(".")) 
+      setErrors((prev) => ({ ...prev, email: "Please enter a valid email." }));
+      return false;
+    }
+    setErrors((prev) => ({ ...prev, email: "" }));
+    return true;
+  };
 
   return (
     <form className="form" onSubmit={handleSubmit}>
@@ -102,7 +123,7 @@ export const SignupForm = () => {
         name={"number"}
         error={errors.number}
         label={"Phone Number"}
-        type={"number"}
+        type={"text"}
         value={formData.number}
         handleChange={handleChange(validateNumber)}
         required={true}
@@ -113,7 +134,7 @@ export const SignupForm = () => {
         label={"Email"}
         type={"text"}
         value={formData.email}
-        handleChange={handleChange}
+        handleChange={handleChange(validateEmail)}
         required={true}
       />
       <Input
@@ -122,11 +143,11 @@ export const SignupForm = () => {
         label={"Your Address"}
         type={"text"}
         value={formData.address}
-        handleChange={handleChange}
+        handleChange={handleChange()}
         required={false}
       />
 
-      <button type="submit" className="">
+      <button type="submit" disabled={true} className={classNames("submit-volunteer")}>
         Submit
       </button>
     </form>

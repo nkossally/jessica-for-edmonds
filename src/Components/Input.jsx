@@ -1,3 +1,4 @@
+import classNames from "classnames";
 export const Input = ({
   label,
   error,
@@ -13,12 +14,12 @@ export const Input = ({
       <input
         type={type}
         name={name}
-        className="input-element"
+        className={classNames("input-element", error &&  "input-element-error")}
         value={value}
         onChange={handleChange}
         required={required}
       />
-      <div classname="form-error">{error}</div>
+      <div className="form-error">{error}</div>
     </div>
   );
 };
