@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import classNames from "classnames";
 import { Input } from "./Input";
+import { fabClasses } from "@mui/material";
 
 export const SignupForm = () => {
   const [formData, setFormData] = useState({
@@ -9,6 +10,12 @@ export const SignupForm = () => {
     email: "",
     address: "",
   });
+  const [isFormValid, setIsFormValid] = useState(false)
+
+  useEffect(()=>{
+    setIsFormValid(validateForm())
+
+  }, [formData])
 
   const [errors, setErrors] = useState({});
 
@@ -39,39 +46,42 @@ export const SignupForm = () => {
   const validateName = (nameInput) => {
     if (!nameInput) {
       setErrors((prev) => ({ ...prev, name: "Please enter your full name." }));
+      return false
     } else {
       setErrors((prev) => ({ ...prev, name: "" }));
+      return true;
     }
   };
 
   const validateNumber = (numberInput) => {
-    const numbersOnly = numberInput.replace(/\D/g, "");
+    const numbersOnly = numberInput.replace(/\D/g, "").slice(0, 11);
 
     if (!numbersOnly) {
       setErrors((prev) => ({
         ...prev,
         number: "Please enter a valid phone number.",
       }));
-      return;
+      return fabClasses;
     }
     if (numbersOnly.length !== 10 && numbersOnly.length !== 11) {
       setErrors((prev) => ({
         ...prev,
         number: "Please enter a valid phone number.",
       }));
-      return;
+      return false;
     }
     if (numbersOnly.length === 11 && numbersOnly[0] !== "1") {
       setErrors((prev) => ({
         ...prev,
         number: "Please enter a valid phone number.",
       }));
-      return;
+      return false;
     }
     setErrors((prev) => ({
       ...prev,
       number: "",
     }));
+    return true;
   };
 
   const formatPhoneNumber = (numberInput) => {
@@ -98,9 +108,7 @@ export const SignupForm = () => {
   };
 
   const validateEmail = (emailInput) => {
-    console.log("emailInput", emailInput)
     if (!emailInput || !emailInput.includes("@") || !emailInput.includes(".")) {
-      console.log(!emailInput , !emailInput.includes("@") , !emailInput.includes(".")) 
       setErrors((prev) => ({ ...prev, email: "Please enter a valid email." }));
       return false;
     }
@@ -147,7 +155,7 @@ export const SignupForm = () => {
         required={false}
       />
 
-      <button type="submit" disabled={true} className={classNames("submit-volunteer")}>
+      <button type="submit" disabled={isFormValid} className={(isFormValid ? "submit-volunteer-valid" : "submit-volunteer")}>
         Submit
       </button>
     </form>
