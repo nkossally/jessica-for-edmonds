@@ -1,4 +1,12 @@
-export const Input = ({ label, error, type, name, value, handleChange , required}) => {
+export const Input = ({
+  label,
+  error,
+  type,
+  name,
+  value,
+  handleChange,
+  required,
+}) => {
   return (
     <div className="input-element-container">
       <label className="input-label">{label}</label>
@@ -10,9 +18,7 @@ export const Input = ({ label, error, type, name, value, handleChange , required
         onChange={handleChange}
         required={required}
       />
-        <div classname="form-error">{error}</div>
-
+      <div classname="form-error">{error}</div>
     </div>
-
   );
 };
