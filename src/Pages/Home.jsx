@@ -1,7 +1,10 @@
 import { Carousel } from "../Components/Carousel";
 import { AboutSectionOne } from "../Components/AboutSectionOne";
 import { PanelOne } from "../Components/PanelOne";
+import { PanelTwo } from "../Components/PanelTwo";
+
 export const Home = () => {
+  
   const carouselItems = [
     { name: "blarg 1", imagePath: "slider-1.png", description: "First slide" },
     { name: "blarg 2", imagePath: "slider-2.png", description: "Second slide" },
@@ -17,6 +20,7 @@ export const Home = () => {
         {/* <Carousel items={carouselItems}></Carousel> */}
         <AboutSectionOne/>
         <PanelOne />
+        <PanelTwo />
 
       </div>
   )

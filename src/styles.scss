@@ -472,13 +472,17 @@ code {
     display: flex;
     flex-direction: column;
     width: 100%;
-    padding: 0px 400px 0px 40px;
+}
+
+.inner-panel{
+    margin: 20px 40px 20px 40px;
+
 }
 
 .panel-title{
     color: $blue;
     font-size: 40px;
-    margin: 0px 40px;
+    margin: 40px 40px;
     font-weight: bold;
     text-transform: capitalize;
 
@@ -488,7 +492,11 @@ code {
 .panel-text{
     color: black;
     font-size: 16px;
+    margin: 5px 40px;
+}
+
+.panel-quote{
+    color: black;
+    font-size: 24px;
     margin: 0px 40px;
-
-
 }
