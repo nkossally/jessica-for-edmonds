@@ -304,6 +304,8 @@ code {
     justify-content: center;
     align-items: center;
     font-size: 10px;
+    background-color: #12110B;
+    color: white;
 
 }
 
@@ -463,4 +465,30 @@ code {
     &:hover {
         background-color: #2A1CE6;
     }
+}
+
+.panel {
+    background: white;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 0px 400px 0px 40px;
+}
+
+.panel-title{
+    color: $blue;
+    font-size: 40px;
+    margin: 0px 40px;
+    font-weight: bold;
+    text-transform: capitalize;
+
+
+}
+
+.panel-text{
+    color: black;
+    font-size: 16px;
+    margin: 0px 40px;
+
+
 }

@@ -4,7 +4,7 @@ export const Footer = () => {
         <div>
         PAID FOR BY WILSON FOR SEATTLE | P.O. BOX 12171 | SEATTLE, WA 98102
         </div>
-      <img className="nav-logo-footer" src={ process.env.PUBLIC_URL +  "/" + "katie_logo.png"} />
+      {/* <img className="nav-logo-footer" src={ process.env.PUBLIC_URL +  "/" + "katie_logo.png"} /> */}
     </div>
   );
 };
