@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/wilsonforseattle/static/css/main.2884f23f.css",
-    "main.js": "/wilsonforseattle/static/js/main.6d7d3f5f.js",
+    "main.css": "/wilsonforseattle/static/css/main.d9610878.css",
+    "main.js": "/wilsonforseattle/static/js/main.3e5b5319.js",
     "static/js/453.00d06119.chunk.js": "/wilsonforseattle/static/js/453.00d06119.chunk.js",
     "static/media/logo.svg": "/wilsonforseattle/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
     "index.html": "/wilsonforseattle/index.html",
-    "main.2884f23f.css.map": "/wilsonforseattle/static/css/main.2884f23f.css.map",
-    "main.6d7d3f5f.js.map": "/wilsonforseattle/static/js/main.6d7d3f5f.js.map",
+    "main.d9610878.css.map": "/wilsonforseattle/static/css/main.d9610878.css.map",
+    "main.3e5b5319.js.map": "/wilsonforseattle/static/js/main.3e5b5319.js.map",
     "453.00d06119.chunk.js.map": "/wilsonforseattle/static/js/453.00d06119.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.2884f23f.css",
-    "static/js/main.6d7d3f5f.js"
+    "static/css/main.d9610878.css",
+    "static/js/main.3e5b5319.js"
   ]
 }
