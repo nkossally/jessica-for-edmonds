@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import classNames from "classnames";
 import { Input } from "./Input";
 import { fabClasses } from "@mui/material";
+import { signUp } from "../requests";
 
 export const SignupForm = () => {
   const [formData, setFormData] = useState({
@@ -9,6 +10,7 @@ export const SignupForm = () => {
     number: "",
     email: "",
     address: "",
+    subscribeOption: false,
   });
   const [isFormValid, setIsFormValid] = useState(false)
 
@@ -27,6 +29,14 @@ export const SignupForm = () => {
       const formatted = formatPhoneNumber(numbersOnly);
       newFormData = { ...formData, number: formatted };
     }
+    if(name === "subscribeOption"){
+      const checked = e.target.checked
+      if(formData.subscribeOption){
+         newFormData = { ...formData, subscribeOption: false };
+      } else {
+           newFormData = { ...formData, subscribeOption: true };      
+      }
+    }
 
     setFormData(newFormData);
     if (validationCallback) {
@@ -34,9 +44,10 @@ export const SignupForm = () => {
     }
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setFormData({ name: "", number: "" });
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    const resp  = await signUp(formData)
+    console.log("resp", resp)
   };
 
   const validateForm = () => {
@@ -154,8 +165,17 @@ export const SignupForm = () => {
         handleChange={handleChange()}
         required={false}
       />
+      <label className="subscribe-option-input">
+        <input
+          name="subscribeOption"
+          type="checkbox"
+          checked={formData.subscribeOption}        
+          onChange={handleChange()}
+        />
+        I agree to receive emails from this campaign.
+      </label>
 
-      <button type="submit" disabled={isFormValid} className={(isFormValid ? "submit-volunteer-valid" : "submit-volunteer")}>
+      <button type="submit" onClick={handleSubmit} disabled={!isFormValid} className={(isFormValid ? "submit-volunteer-valid" : "submit-volunteer")}>
         Submit
       </button>
     </form>
