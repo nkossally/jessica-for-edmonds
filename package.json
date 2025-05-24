@@ -1,8 +1,8 @@
 {
-  "name": "wilsonforseattle",
+  "name": "jessica-for-edmonds",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://nkossally.github.io/wilsonforseattle",
+  "homepage": "https://nkossally.github.io/jessicaforedmonds",
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
