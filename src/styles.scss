@@ -2,6 +2,10 @@ $blue: #2519D2;
 $yellow: #FFAB00;
 $nav-logo-width: 200px;
 
+$american-blue: #0157ae;
+$american-red:  #d42729;
+$dark-gray: #12110B;
+
 body {
     margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -65,7 +69,7 @@ code {
     // position: sticky;
     // top: 0;
 
-    background-color: $blue;
+    background-color: $american-blue;
     width: 100%;
     height: 70px;
 }
@@ -194,7 +198,7 @@ code {
     cursor: pointer;
     outline: inherit;
 
-    color: $blue;
+    color: $american-blue;
     font-size: 36px;
     margin-bottom: 15px;
     letter-spacing: 2px;
@@ -304,7 +308,7 @@ code {
     justify-content: center;
     align-items: center;
     font-size: 10px;
-    background-color: #12110B;
+    background-color: $dark-gray;
     color: white;
 
 }
@@ -330,7 +334,6 @@ code {
 }
 
 .about-section-one {
-    background: $blue;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -366,7 +369,6 @@ code {
     margin: 0px 0px 0px 50px;
 
     font-family: unionGothic;
-    color: white;
 
     @media (min-width: 1000px) {
         font-size: 50px;
@@ -426,7 +428,7 @@ code {
 .volunteer-title {
     font-family: unionGothic;
     font-size: 40px;
-    color: $blue;
+    color: $american-blue;
     width: 625px;
     text-align: center;
 }
@@ -480,7 +482,7 @@ code {
 }
 
 .panel-title{
-    color: $blue;
+    color: $american-blue;
     font-size: 40px;
     margin: 40px 40px;
     font-weight: bold;
