@@ -8,7 +8,7 @@ export const AboutSectionOne = () => {
       </h1>
 
       <div className="half-section">
-        <img className="about-section-one-image" src={process.env.PUBLIC_URL + "/" + "jessica 1.jpeg"} />
+        <img className="about-section-one-image" src={process.env.PUBLIC_URL + "/" + "jessica 14.png"} />
       </div>
     </div>
   );
