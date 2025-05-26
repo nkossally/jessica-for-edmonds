@@ -1,6 +1,8 @@
+import classNames from "classnames";
+
 export const PanelOne = () => {
   return (
-    <div className="panel">
+    <div className={classNames("panel")}>
         <div className="inner-panel">
 
       <div className="panel-title"> why I’m running</div>
