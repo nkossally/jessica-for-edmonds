@@ -350,7 +350,6 @@ code {
     height: fit-content;
     background-color: $light-blue;
 
-
     @media (min-width: 1000px) {
         flex-direction: row;
         height: 600px;
@@ -358,7 +357,15 @@ code {
 
 }
 
+.about-section-one-inner{
+    margin: 0px 40px;
+    width: 100%;
+    height: fit-content;
+    border: 1px solid black;
+}
+
 .half-section {
+    margin-left: 40px;
     width: 60%;
     display: flex;
     justify-content: center;
@@ -370,17 +377,9 @@ code {
 
 .about-section-one-image {
     height: 600px;
-    // background-color: $american-blue;
-    // border-radius: 25px;
-    margin: 10px 10px;
-    // border: 1px solid $yellow;
-    // box-shadow:
-    //   1px 2px 2px hsl(220deg 60% 50% / 0.2),
-    //   2px 4px 4px hsl(220deg 60% 50% / 0.2),
-    //   4px 8px 8px hsl(220deg 60% 50% / 0.2),
-    //   8px 16px 16px hsl(220deg 60% 50% / 0.2),
-    //   16px 32px 32px hsl(220deg 60% 50% / 0.2);
-  
+
+    // margin: 10px 10px;
+
     @media (min-width: 1000px) {}
 }
 

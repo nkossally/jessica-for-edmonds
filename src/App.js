@@ -7,6 +7,7 @@ import { Platform } from "./Pages/Platform";
 import { Volunteer } from "./Pages/Volunteer";
 import { NavBar } from "./Components/NavBar";
 import { Footer } from "./Components/Footer";
+import { DonatePage } from "./Pages/DonatePage";
 
 const SCROLL_THRESHOLD = 5;
 
@@ -39,7 +40,8 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/platform" element={<Platform />} />
-           <Route path="/volunteer" element={<Volunteer />} />
+          <Route path="/volunteer" element={<Volunteer />} />
+          <Route path="/donate" element={<DonatePage />} />
           <Route path="*" element={<Home />} />
         </Routes>
         <Footer />

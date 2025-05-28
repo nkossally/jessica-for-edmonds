@@ -21,6 +21,7 @@ export const NavBar = () => {
   const isHome = location.pathname === "/";
   const isOnAbout = location.pathname.toLowerCase() === "/platform";
   const isOnVolunteer = location.pathname.toLowerCase() === "/volunteer";
+  const isOnDonate = location.pathname.toLowerCase() === "/donate";
 
   const closeModalAndGoToPage = (page) => {
     handleClose();
@@ -76,6 +77,15 @@ export const NavBar = () => {
         >
           Volunteer
         </Link>
+        <Link
+          className={classNames(
+            "nav-link",
+            isOnDonate ? "nav-link-active" : ""
+          )}
+          to="/donate"
+        >
+          Donate
+        </Link>
       </div>
 
       <div>
@@ -122,6 +132,16 @@ export const NavBar = () => {
             >
               {" "}
               Volunteer
+            </button>
+            <button
+              className={classNames(
+                "side-menu-nav-link",
+                isOnAbout ? "side-menu-nav-link-active" : ""
+              )}
+              onClick={() => closeModalAndGoToPage("/donate")}
+            >
+              {" "}
+              Donate
             </button>
           </div>
         </Modal>
