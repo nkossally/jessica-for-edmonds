@@ -9,17 +9,17 @@ export const DonateForm = () => {
     name: "",
     email: "",
     address: "",
-    cardNumbrer: "",
+    cardNumber: "",
     expiration: "",
     cvccvv: "",
-    zip: ""
+    zip: "",
+    amount: "",
   });
-  const [isFormValid, setIsFormValid] = useState(false)
+  const [isFormValid, setIsFormValid] = useState(false);
 
-  useEffect(()=>{
-    setIsFormValid(validateForm())
-
-  }, [formData])
+  useEffect(() => {
+    setIsFormValid(validateForm());
+  }, [formData]);
 
   const [errors, setErrors] = useState({});
 
@@ -31,14 +31,6 @@ export const DonateForm = () => {
       const formatted = formatPhoneNumber(numbersOnly);
       newFormData = { ...formData, number: formatted };
     }
-    if(name === "subscribeOption"){
-      const checked = e.target.checked
-      if(formData.subscribeOption){
-         newFormData = { ...formData, subscribeOption: false };
-      } else {
-           newFormData = { ...formData, subscribeOption: true };      
-      }
-    }
 
     setFormData(newFormData);
     if (validationCallback) {
@@ -47,19 +39,23 @@ export const DonateForm = () => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    const resp  = await signUp(formData)
-    console.log("resp", resp)
+    e.preventDefault();
+    const resp = await signUp(formData);
+    console.log("resp", resp);
   };
 
   const validateForm = () => {
-    return validateName(formData.name) && validateEmail(formData.email) && validateNumber(formData.number)
+    return (
+      validateName(formData.name) &&
+      validateEmail(formData.email) &&
+      validateNumber(formData.number)
+    );
   };
 
   const validateName = (nameInput) => {
     if (!nameInput) {
       setErrors((prev) => ({ ...prev, name: "Please enter your full name." }));
-      return false
+      return false;
     } else {
       setErrors((prev) => ({ ...prev, name: "" }));
       return true;
@@ -141,15 +137,6 @@ export const DonateForm = () => {
         required={true}
       />
       <Input
-        name={"number"}
-        error={errors.number}
-        label={"Phone Number"}
-        type={"text"}
-        value={formData.number}
-        handleChange={handleChange(validateNumber)}
-        required={true}
-      />
-      <Input
         name={"email"}
         error={errors.email}
         label={"Email"}
@@ -167,17 +154,55 @@ export const DonateForm = () => {
         handleChange={handleChange()}
         required={false}
       />
-      <label className="subscribe-option-input">
-        <input
-          name="subscribeOption"
-          type="checkbox"
-          checked={formData.subscribeOption}        
-          onChange={handleChange()}
-        />
-        I agree to receive emails from this campaign.
-      </label>
+      <Input
+        name="cardNumber"
+        type="text"
+        error={errors.cardNumber}
+        label={"Card Number"}
+        value={formData.cardNumber}
+        handleChange={handleChange()}
+        required={true}
+        images={[
+          process.env.PUBLIC_URL + "/" + "american-express.svg",
+          process.env.PUBLIC_URL + "/" + "discover.svg",
+          process.env.PUBLIC_URL + "/" + "visa.svg",
+          process.env.PUBLIC_URL + "/" + "mastercard.svg",
+        ]}
+      />
 
-      <button type="submit" onClick={handleSubmit} disabled={!isFormValid} className={(isFormValid ? "submit-volunteer-valid" : "submit-volunteer")}>
+      <Input
+        name="expiration"
+        type="text"
+        error={errors.expiration}
+        label={"Expiration Date"}
+        value={formData.expiration}
+        handleChange={handleChange()}
+        required={true}
+      />
+      <Input
+        name="cardNumber"
+        type="text"
+        error={errors.cvccvv}
+        label={"CVC/CVV"}
+        value={formData.cvccvv}
+        handleChange={handleChange()}
+        required={false}
+      />
+      <Input
+        name="zip"
+        type="text"
+        error={errors.zip}
+        label={"Zip Code"}
+        value={formData.zip}
+        handleChange={handleChange()}
+        required={false}
+      />
+      <button
+        type="submit"
+        onClick={handleSubmit}
+        disabled={!isFormValid}
+        className={isFormValid ? "submit-volunteer-valid" : "submit-volunteer"}
+      >
         Submit
       </button>
     </form>

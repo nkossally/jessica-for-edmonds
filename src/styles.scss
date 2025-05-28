@@ -445,6 +445,29 @@ code {
 
 }
 
+.input-and-images{
+    display: flex;
+    flex-direction: row;
+}
+
+.card-images-container{
+    position: relative;
+    left: 50px;
+    //  top: -1/2;
+    // translate: y 1/2;
+    //  flex gap-2">
+
+}
+
+.card-logo{
+
+    // position: absolute;
+    // right: 3;
+    // top: 1/2;
+    // transform: -translate-y-1/2 w-5 h-5;
+    pointer-events: none;
+}
+
 .form-error {
     // color: #EB6864;
     color: #EC6864;
