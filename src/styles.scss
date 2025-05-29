@@ -3,7 +3,7 @@ $yellow: #FFAB00;
 $nav-logo-width: 200px;
 
 $american-blue: #0157ae;
-$american-red:  #d42729;
+$american-red: #d42729;
 $dark-gray: #12110B;
 
 // $general-font: "Roboto";
@@ -11,8 +11,8 @@ $dark-gray: #12110B;
 $general-font: 'Roboto', sans-serif;
 
 
-$light-blue:	#F5FBFF;
-$darker-light-blue:	#DCEEFF;
+$light-blue: #F5FBFF;
+$darker-light-blue: #DCEEFF;
 
 
 body {
@@ -357,7 +357,7 @@ code {
 
 }
 
-.about-section-one-inner{
+.about-section-one-inner {
     margin: 0px 40px;
     width: 100%;
     height: fit-content;
@@ -383,25 +383,26 @@ code {
     @media (min-width: 1000px) {}
 }
 
-  .traditional.box {
+.traditional.box {
     box-shadow:
-      0 6px 6px hsl(0deg 0% 0% / 0.3);
-  }
-  .layered.box {
+        0 6px 6px hsl(0deg 0% 0% / 0.3);
+}
+
+.layered.box {
     box-shadow:
-      0 1px 1px hsl(0deg 0% 0% / 0.075),
-      0 2px 2px hsl(0deg 0% 0% / 0.075),
-      0 4px 4px hsl(0deg 0% 0% / 0.075),
-      0 8px 8px hsl(0deg 0% 0% / 0.075),
-      0 16px 16px hsl(0deg 0% 0% / 0.075)
-    ;
-  }
+        0 1px 1px hsl(0deg 0% 0% / 0.075),
+        0 2px 2px hsl(0deg 0% 0% / 0.075),
+        0 4px 4px hsl(0deg 0% 0% / 0.075),
+        0 8px 8px hsl(0deg 0% 0% / 0.075),
+        0 16px 16px hsl(0deg 0% 0% / 0.075);
+}
 
 .about-section-one-text {
     font-size: 30px;
     margin: 0px 0px 0px 50px;
 
     font-family: $general-font;
+
     @media (min-width: 1000px) {
         font-size: 50px;
     }
@@ -424,6 +425,7 @@ code {
     background-color: #E9F0FE;
     height: 40px;
     border-radius: 5px;
+    width: 580px;
 
     &:focus {
         background-color: white;
@@ -445,26 +447,19 @@ code {
 
 }
 
-.input-and-images{
+.input-and-images {
     display: flex;
     flex-direction: row;
+    width: 800px;
 }
 
-.card-images-container{
+.card-images-container {
     position: relative;
-    left: 50px;
-    //  top: -1/2;
-    // translate: y 1/2;
-    //  flex gap-2">
-
 }
 
-.card-logo{
-
-    // position: absolute;
-    // right: 3;
-    // top: 1/2;
-    // transform: -translate-y-1/2 w-5 h-5;
+.card-logo {
+    position: relative;
+    left: -200px;
     pointer-events: none;
 }
 
@@ -533,16 +528,16 @@ code {
     font-family: $general-font;
 }
 
-.panel-two{
+.panel-two {
     background-color: $light-blue;
 }
 
-.inner-panel{
+.inner-panel {
     margin: 20px 40px 20px 40px;
 
 }
 
-.panel-title{
+.panel-title {
     color: $american-blue;
     font-size: 40px;
     margin: 40px 40px;
@@ -550,18 +545,18 @@ code {
     text-transform: capitalize;
 }
 
-.panel-text{
+.panel-text {
     color: black;
     font-size: 16px;
     margin: 5px 40px;
 }
 
-.panel-quote{
+.panel-quote {
     color: black;
     font-size: 24px;
     margin: 0px 40px;
 }
 
-.subscribe-option-input{
+.subscribe-option-input {
     margin-left: 20px;
 }
