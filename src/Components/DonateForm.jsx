@@ -16,6 +16,7 @@ export const DonateForm = () => {
     amount: "",
   });
   const [isFormValid, setIsFormValid] = useState(false);
+  const [showCustomAmountInput, setShowCustomAmountInput] = useState(false);
 
   useEffect(() => {
     setIsFormValid(validateForm());
@@ -26,11 +27,6 @@ export const DonateForm = () => {
   const handleChange = (validationCallback) => (e) => {
     const { name, value } = e.target;
     let newFormData = { ...formData, [name]: value };
-    if (name === "number") {
-      const numbersOnly = value.replace(/\D/g, "");
-      const formatted = formatPhoneNumber(numbersOnly);
-      newFormData = { ...formData, number: formatted };
-    }
 
     setFormData(newFormData);
     if (validationCallback) {
@@ -47,8 +43,7 @@ export const DonateForm = () => {
   const validateForm = () => {
     return (
       validateName(formData.name) &&
-      validateEmail(formData.email) &&
-      validateNumber(formData.number)
+      validateEmail(formData.email)
     );
   };
 
@@ -62,60 +57,6 @@ export const DonateForm = () => {
     }
   };
 
-  const validateNumber = (numberInput) => {
-    const numbersOnly = numberInput.replace(/\D/g, "").slice(0, 11);
-
-    if (!numbersOnly) {
-      setErrors((prev) => ({
-        ...prev,
-        number: "Please enter a valid phone number.",
-      }));
-      return fabClasses;
-    }
-    if (numbersOnly.length !== 10 && numbersOnly.length !== 11) {
-      setErrors((prev) => ({
-        ...prev,
-        number: "Please enter a valid phone number.",
-      }));
-      return false;
-    }
-    if (numbersOnly.length === 11 && numbersOnly[0] !== "1") {
-      setErrors((prev) => ({
-        ...prev,
-        number: "Please enter a valid phone number.",
-      }));
-      return false;
-    }
-    setErrors((prev) => ({
-      ...prev,
-      number: "",
-    }));
-    return true;
-  };
-
-  const formatPhoneNumber = (numberInput) => {
-    numberInput = numberInput.slice(0, 11);
-    let formatted = numberInput;
-
-    if (numberInput.length > 0) {
-      formatted = `(${numberInput.slice(0, 3)}`;
-    }
-    if (numberInput.length > 3) {
-      formatted += `) ${numberInput.slice(3, 6)}`;
-    }
-    if (numberInput.length > 6) {
-      formatted += `-${numberInput.slice(6)}`;
-    }
-    if (numberInput.length === 11 && numberInput[0] === "1") {
-      formatted = `1 (${numberInput.slice(1, 4)}) ${numberInput.slice(
-        4,
-        7
-      )}-${numberInput.slice(7, 11)}`;
-    }
-
-    return formatted;
-  };
-
   const validateEmail = (emailInput) => {
     if (!emailInput || !emailInput.includes("@") || !emailInput.includes(".")) {
       setErrors((prev) => ({ ...prev, email: "Please enter a valid email." }));
@@ -125,8 +66,38 @@ export const DonateForm = () => {
     return true;
   };
 
+  const handleAmountButton = (customAmount) => () =>{
+    setShowCustomAmountInput(false)
+    setFormData({...formData, amount: customAmount });
+  }
+
+  const handleShowCustomAmount = () =>{
+    setFormData({...formData, amount: 0 });
+    setShowCustomAmountInput(true)
+  }
+
   return (
     <form className="form" onSubmit={handleSubmit}>
+      <div className="amount-buttons">
+        <button onClick={handleAmountButton(10)}> 10</button>
+        <button  onClick={handleAmountButton(20)}> 20</button>
+        <button  onClick={handleAmountButton(100)}> 100</button>
+      </div>
+
+      {!showCustomAmountInput && <button onClick={handleShowCustomAmount}> custom</button>}
+
+      {showCustomAmountInput && (
+        <Input
+          name={"amount"}
+          error={errors.amount}
+          label={"Amount"}
+          type={"number"}
+          value={formData.amount}
+          handleChange={handleChange()}
+          required={false}
+        />
+      )}
+
       <Input
         name={"name"}
         error={errors.name}
