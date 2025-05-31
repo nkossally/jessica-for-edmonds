@@ -7,8 +7,8 @@ const CARD_TYPES = {
   VISA: "VISA",
   MASTERCARD: "MASTERCARD",
   AMEX: "AMEX",
-  DISCOVER: "DISCOVER"
-}
+  DISCOVER: "DISCOVER",
+};
 
 export const DonateForm = () => {
   const [formData, setFormData] = useState({
@@ -26,6 +26,7 @@ export const DonateForm = () => {
   const [settledCardType, setSettledCardType] = useState("");
   const [formattedCardnumber, setFormattedCardnumber] = useState("");
   const [selectedAmountButton, setSelectedAmountButton] = useState("");
+  const [formattedExpiration, setFormattedExpiration] = useState("");
 
   useEffect(() => {
     setIsFormValid(validateForm());
@@ -41,6 +42,8 @@ export const DonateForm = () => {
     if (validationCallback) {
       validationCallback(value);
     }
+
+    validateForm();
   };
 
   const handleSubmit = async (e) => {
@@ -50,10 +53,17 @@ export const DonateForm = () => {
   };
 
   const validateForm = () => {
+    validateName(formData.name);
+    validateEmail(formData.email);
+    validateAddress(formData.address);
+    validateCardNumber(formData.cardNumber);
+    validateAmount(formData.amount);
     return (
       validateName(formData.name) &&
       validateEmail(formData.email) &&
-      validateAddress(formData.address)
+      validateAddress(formData.address) &&
+      validateCardNumber(formData.cardNumber) &&
+      validateAmount(formData.amount)
     );
   };
 
@@ -92,7 +102,7 @@ export const DonateForm = () => {
 
   const handleShowCustomAmount = () => {
     setFormData({ ...formData, amount: 0 });
-    setSelectedAmountButton(undefined)
+    setSelectedAmountButton(undefined);
     setShowCustomAmountInput(true);
   };
 
@@ -101,14 +111,18 @@ export const DonateForm = () => {
     onlyDigits = onlyDigits.slice(0, 16);
 
     const cardTypes = [
-      { type:CARD_TYPES.VISA, regex: /^4\d{12}(\d{3})?$/, length: [13, 16] },
+      { type: CARD_TYPES.VISA, regex: /^4\d{12}(\d{3})?$/, length: [13, 16] },
       {
-        type:CARD_TYPES.MASTERCARD,
+        type: CARD_TYPES.MASTERCARD,
         regex: /^5[1-5]\d{14}|^2[2-7]\d{14}$/,
         length: [16],
       },
       { type: CARD_TYPES.AMEX, regex: /^3[47]\d{13}$/, length: [15] },
-      { type: CARD_TYPES.DISCOVER, regex: /^6(?:011|5\d{2})\d{12}$/, length: [16] },
+      {
+        type: CARD_TYPES.DISCOVER,
+        regex: /^6(?:011|5\d{2})\d{12}$/,
+        length: [16],
+      },
     ];
 
     const type = cardTypes.find((t) => t.regex.test(onlyDigits));
@@ -121,9 +135,9 @@ export const DonateForm = () => {
     setFormattedCardnumber(onlyDigits);
 
     if (
-      cardType === CARD_TYPES.VISA||
-      cardType ===  CARD_TYPES.MASTERCARD ||
-      cardType ===  CARD_TYPES.DISCOVER
+      cardType === CARD_TYPES.VISA ||
+      cardType === CARD_TYPES.MASTERCARD ||
+      cardType === CARD_TYPES.DISCOVER
     ) {
       if (onlyDigits?.length > 12) {
         setFormattedCardnumber(
@@ -148,7 +162,7 @@ export const DonateForm = () => {
           onlyDigits.slice(0, 4) + "-" + onlyDigits.slice(4)
         );
       }
-    } else if (cardType ===  CARD_TYPES.AMEX) {
+    } else if (cardType === CARD_TYPES.AMEX) {
       if (onlyDigits?.length > 10) {
         setFormattedCardnumber(
           onlyDigits.slice(0, 5) +
@@ -173,11 +187,22 @@ export const DonateForm = () => {
       setErrors((prev) => ({ ...prev, cardNumber: "" }));
     }
 
-    return {
-      isValid,
-      cardType,
-    };
+    return isValid;
   }
+
+  const validateAmount = (amount) => {
+    console.log("amount", amount);
+    if (!amount) {
+      setErrors((prev) => ({
+        ...prev,
+        amount: "Please select an amount to donate, or enter a custom amount.",
+      }));
+      return false;
+    } else {
+      setErrors((prev) => ({ ...prev, amount: "" }));
+      return true;
+    }
+  };
 
   let images = [
     process.env.PUBLIC_URL + "/" + "american-express.svg",
@@ -198,40 +223,43 @@ export const DonateForm = () => {
 
   return (
     <form className="form" onSubmit={handleSubmit}>
-      <div className="amount-buttons-container">
-        <button
-          className={classNames(
-            "amount-button",
-            selectedAmountButton == 10 ? "amount-button-selected" : ""
-          )}
-          key="ammount-10"
-          onClick={handleAmountButton(10)}
-        >
-          {" "}
-          10
-        </button>
-        <button
-          className={classNames(
-            "amount-button",
-            selectedAmountButton == 20 ? "amount-button-selected" : ""
-          )}
-          key="ammount-20"
-          onClick={handleAmountButton(20)}
-        >
-          {" "}
-          20
-        </button>
-        <button
-          className={classNames(
-            "amount-button",
-            selectedAmountButton == 100 ? "amount-button-selected" : ""
-          )}
-          key="ammount-100"
-          onClick={handleAmountButton(100)}
-        >
-          {" "}
-          100
-        </button>
+      <div className="custom-amounts-and-error">
+        <div className="amount-buttons-container">
+          <button
+            className={classNames(
+              "amount-button",
+              selectedAmountButton == 10 ? "amount-button-selected" : ""
+            )}
+            key="ammount-10"
+            onClick={handleAmountButton(10)}
+          >
+            {" "}
+            10
+          </button>
+          <button
+            className={classNames(
+              "amount-button",
+              selectedAmountButton == 20 ? "amount-button-selected" : ""
+            )}
+            key="ammount-20"
+            onClick={handleAmountButton(20)}
+          >
+            {" "}
+            20
+          </button>
+          <button
+            className={classNames(
+              "amount-button",
+              selectedAmountButton == 100 ? "amount-button-selected" : ""
+            )}
+            key="ammount-100"
+            onClick={handleAmountButton(100)}
+          >
+            {" "}
+            100
+          </button>
+        </div>
+        <div>{!showCustomAmountInput && errors.amount}</div>
       </div>
 
       {!showCustomAmountInput && (
@@ -253,7 +281,7 @@ export const DonateForm = () => {
           label={"Amount"}
           type={"number"}
           value={formData.amount}
-          handleChange={handleChange()}
+          handleChange={handleChange(validateAmount)}
           required={false}
         />
       )}
