@@ -454,11 +454,16 @@ code {
 
 .card-images-container {
     position: relative;
+    left: -200px;
+}
+
+.card-images-container-small {
+    position: relative;
+    left: -50px;
 }
 
 .card-logo {
     position: relative;
-    left: -200px;
     pointer-events: none;
 }
 

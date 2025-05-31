@@ -3,6 +3,13 @@ import classNames from "classnames";
 import { Input } from "./Input";
 import { signUp } from "../requests";
 
+const CARD_TYPES = {
+  VISA: "VISA",
+  MASTERCARD: "MASTERCARD",
+  AMEX: "AMEX",
+  DISCOVER: "DISCOVER"
+}
+
 export const DonateForm = () => {
   const [formData, setFormData] = useState({
     name: "",
@@ -17,7 +24,7 @@ export const DonateForm = () => {
   const [isFormValid, setIsFormValid] = useState(false);
   const [showCustomAmountInput, setShowCustomAmountInput] = useState(false);
   const [settledCardType, setSettledCardType] = useState("");
-  const [formattedCardnumber, setFormattedCardnumber] = useState(false);
+  const [formattedCardnumber, setFormattedCardnumber] = useState("");
   const [selectedAmountButton, setSelectedAmountButton] = useState("");
 
   useEffect(() => {
@@ -94,14 +101,14 @@ export const DonateForm = () => {
     onlyDigits = onlyDigits.slice(0, 16);
 
     const cardTypes = [
-      { type: "Visa", regex: /^4\d{12}(\d{3})?$/, length: [13, 16] },
+      { type:CARD_TYPES.VISA, regex: /^4\d{12}(\d{3})?$/, length: [13, 16] },
       {
-        type: "MasterCard",
+        type:CARD_TYPES.MASTERCARD,
         regex: /^5[1-5]\d{14}|^2[2-7]\d{14}$/,
         length: [16],
       },
-      { type: "Amex", regex: /^3[47]\d{13}$/, length: [15] },
-      { type: "Discover", regex: /^6(?:011|5\d{2})\d{12}$/, length: [16] },
+      { type: CARD_TYPES.AMEX, regex: /^3[47]\d{13}$/, length: [15] },
+      { type: CARD_TYPES.DISCOVER, regex: /^6(?:011|5\d{2})\d{12}$/, length: [16] },
     ];
 
     const type = cardTypes.find((t) => t.regex.test(onlyDigits));
@@ -114,9 +121,9 @@ export const DonateForm = () => {
     setFormattedCardnumber(onlyDigits);
 
     if (
-      cardType === "Visa" ||
-      cardType === "MasterCard" ||
-      cardType === "Discover"
+      cardType === CARD_TYPES.VISA||
+      cardType ===  CARD_TYPES.MASTERCARD ||
+      cardType ===  CARD_TYPES.DISCOVER
     ) {
       if (onlyDigits?.length > 12) {
         setFormattedCardnumber(
@@ -141,7 +148,7 @@ export const DonateForm = () => {
           onlyDigits.slice(0, 4) + "-" + onlyDigits.slice(4)
         );
       }
-    } else if (cardType === "Amex") {
+    } else if (cardType ===  CARD_TYPES.AMEX) {
       if (onlyDigits?.length > 10) {
         setFormattedCardnumber(
           onlyDigits.slice(0, 5) +
@@ -170,6 +177,23 @@ export const DonateForm = () => {
       isValid,
       cardType,
     };
+  }
+
+  let images = [
+    process.env.PUBLIC_URL + "/" + "american-express.svg",
+    process.env.PUBLIC_URL + "/" + "discover.svg",
+    process.env.PUBLIC_URL + "/" + "visa.svg",
+    process.env.PUBLIC_URL + "/" + "mastercard.svg",
+  ];
+
+  if (settledCardType === CARD_TYPES.VISA) {
+    images = [process.env.PUBLIC_URL + "/" + "visa.svg"];
+  } else if (settledCardType === CARD_TYPES.MASTERCARD) {
+    images = [process.env.PUBLIC_URL + "/" + "mastercard.svg"];
+  } else if (settledCardType === CARD_TYPES.AMEX) {
+    images = [process.env.PUBLIC_URL + "/" + "american-express.svg"];
+  } else if (settledCardType === CARD_TYPES.DISCOVER) {
+    images = [process.env.PUBLIC_URL + "/" + "discover.svg"];
   }
 
   return (
@@ -269,12 +293,7 @@ export const DonateForm = () => {
         value={formattedCardnumber}
         handleChange={handleChange(validateCardNumber)}
         required={true}
-        images={[
-          process.env.PUBLIC_URL + "/" + "american-express.svg",
-          process.env.PUBLIC_URL + "/" + "discover.svg",
-          process.env.PUBLIC_URL + "/" + "visa.svg",
-          process.env.PUBLIC_URL + "/" + "mastercard.svg",
-        ]}
+        images={images}
       />
 
       <Input

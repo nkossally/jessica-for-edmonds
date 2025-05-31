@@ -10,6 +10,8 @@ export const Input = ({
   required,
   images,
 }) => {
+  const imagesClass = images?.length > 1 ? "card-images-container" : "card-images-container-small" 
+
   return (
     <div className="input-element-container">
       <label className="input-label">{label}</label>
@@ -25,7 +27,7 @@ export const Input = ({
           onChange={handleChange}
           required={required}
         />
-        <div className="card-images-container">
+        <div className={imagesClass}>
           {images &&
             images.map((imageSrc) => {
               return <img src={imageSrc} className={classNames("card-logo")} />;
