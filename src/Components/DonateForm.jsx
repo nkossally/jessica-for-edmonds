@@ -17,7 +17,9 @@ export const DonateForm = () => {
   const [isFormValid, setIsFormValid] = useState(false);
   const [showCustomAmountInput, setShowCustomAmountInput] = useState(false);
   const [settledCardType, setSettledCardType] = useState("");
-  const [formattedCardnumber, setFormattedCardnumber] = useState(false)
+  const [formattedCardnumber, setFormattedCardnumber] = useState(false);
+  const [selectedAmountButton, setSelectedAmountButton] = useState("");
+
   useEffect(() => {
     setIsFormValid(validateForm());
   }, [formData]);
@@ -78,16 +80,18 @@ export const DonateForm = () => {
   const handleAmountButton = (customAmount) => () => {
     setShowCustomAmountInput(false);
     setFormData({ ...formData, amount: customAmount });
+    setSelectedAmountButton(customAmount);
   };
 
   const handleShowCustomAmount = () => {
     setFormData({ ...formData, amount: 0 });
+    setSelectedAmountButton(undefined)
     setShowCustomAmountInput(true);
   };
 
   function validateCardNumber(cardNumber) {
     let onlyDigits = cardNumber.replace(/\D/g, "");
-    onlyDigits = onlyDigits.slice(0, 16)
+    onlyDigits = onlyDigits.slice(0, 16);
 
     const cardTypes = [
       { type: "Visa", regex: /^4\d{12}(\d{3})?$/, length: [13, 16] },
@@ -106,39 +110,61 @@ export const DonateForm = () => {
       : false;
     const isValid = !!type && isValidLength;
     const cardType = type?.type;
-    setSettledCardType(cardType)
-    setFormattedCardnumber(onlyDigits)
+    setSettledCardType(cardType);
+    setFormattedCardnumber(onlyDigits);
 
-    if(cardType === "Visa" || cardType === "MasterCard" || cardType === "Discover"){
-      if(onlyDigits?.length > 12){
-        setFormattedCardnumber(onlyDigits.slice(0, 4) + "-" + onlyDigits.slice(4, 8) + "-" + onlyDigits.slice(8, 12) + "-" + onlyDigits.slice(12))
-
-      } else if(onlyDigits?.length > 8){
-        setFormattedCardnumber(onlyDigits.slice(0, 4) + "-" + onlyDigits.slice(4, 8) + "-" + onlyDigits.slice(8))
-
-      } else if(onlyDigits?.length > 4){
-        setFormattedCardnumber(onlyDigits.slice(0, 4) + "-" + onlyDigits.slice(4) )
+    if (
+      cardType === "Visa" ||
+      cardType === "MasterCard" ||
+      cardType === "Discover"
+    ) {
+      if (onlyDigits?.length > 12) {
+        setFormattedCardnumber(
+          onlyDigits.slice(0, 4) +
+            "-" +
+            onlyDigits.slice(4, 8) +
+            "-" +
+            onlyDigits.slice(8, 12) +
+            "-" +
+            onlyDigits.slice(12)
+        );
+      } else if (onlyDigits?.length > 8) {
+        setFormattedCardnumber(
+          onlyDigits.slice(0, 4) +
+            "-" +
+            onlyDigits.slice(4, 8) +
+            "-" +
+            onlyDigits.slice(8)
+        );
+      } else if (onlyDigits?.length > 4) {
+        setFormattedCardnumber(
+          onlyDigits.slice(0, 4) + "-" + onlyDigits.slice(4)
+        );
       }
-    } else if(cardType === "Amex"){
-      if(onlyDigits?.length > 10){
-        setFormattedCardnumber(onlyDigits.slice(0, 5) + "-" + onlyDigits.slice(5, 10) + "-" + onlyDigits.slice(10))
-
-      } else if(onlyDigits?.length > 8){
-        setFormattedCardnumber(onlyDigits.slice(0, 5) + "-" + onlyDigits.slice(5))
-      } 
+    } else if (cardType === "Amex") {
+      if (onlyDigits?.length > 10) {
+        setFormattedCardnumber(
+          onlyDigits.slice(0, 5) +
+            "-" +
+            onlyDigits.slice(5, 10) +
+            "-" +
+            onlyDigits.slice(10)
+        );
+      } else if (onlyDigits?.length > 8) {
+        setFormattedCardnumber(
+          onlyDigits.slice(0, 5) + "-" + onlyDigits.slice(5)
+        );
+      }
     }
 
-    if(!isValid){
-      setErrors((prev) => ({ ...prev, cardNumber:"Please enter a valid card number." }));
+    if (!isValid) {
+      setErrors((prev) => ({
+        ...prev,
+        cardNumber: "Please enter a valid card number.",
+      }));
     } else {
-      setErrors((prev) => ({ ...prev, cardNumber:"" }));
+      setErrors((prev) => ({ ...prev, cardNumber: "" }));
     }
-    console.log('cardType', cardType)
-    console.log(formattedCardnumber)
-    console.log({
-      isValid,
-      cardType,
-    })
 
     return {
       isValid,
@@ -148,14 +174,52 @@ export const DonateForm = () => {
 
   return (
     <form className="form" onSubmit={handleSubmit}>
-      <div className="amount-buttons">
-        <button onClick={handleAmountButton(10)}> 10</button>
-        <button onClick={handleAmountButton(20)}> 20</button>
-        <button onClick={handleAmountButton(100)}> 100</button>
+      <div className="amount-buttons-container">
+        <button
+          className={classNames(
+            "amount-button",
+            selectedAmountButton == 10 ? "amount-button-selected" : ""
+          )}
+          key="ammount-10"
+          onClick={handleAmountButton(10)}
+        >
+          {" "}
+          10
+        </button>
+        <button
+          className={classNames(
+            "amount-button",
+            selectedAmountButton == 20 ? "amount-button-selected" : ""
+          )}
+          key="ammount-20"
+          onClick={handleAmountButton(20)}
+        >
+          {" "}
+          20
+        </button>
+        <button
+          className={classNames(
+            "amount-button",
+            selectedAmountButton == 100 ? "amount-button-selected" : ""
+          )}
+          key="ammount-100"
+          onClick={handleAmountButton(100)}
+        >
+          {" "}
+          100
+        </button>
       </div>
 
       {!showCustomAmountInput && (
-        <button onClick={handleShowCustomAmount}> custom</button>
+        <div className="custom-amount-button-container">
+          <button
+            className="custom-amount-button"
+            onClick={handleShowCustomAmount}
+          >
+            {" "}
+            custom
+          </button>
+        </div>
       )}
 
       {showCustomAmountInput && (

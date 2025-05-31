@@ -410,7 +410,6 @@ code {
 
 .form {
     width: 625px;
-    border: 1px solid $yellow;
 }
 
 .input-element-container {
@@ -561,7 +560,51 @@ code {
     margin-left: 20px;
 }
 
-.amount-buttons{
+.amount-buttons-container {
     display: flex;
     flex-direction: row;
+    margin-left: 20px;
+}
+
+.amount-button {
+    background-color: transparent;
+    color: inherit;
+    width: 100px;
+    height: 50px;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
+    margin-left: 20px;
+
+    &:hover {
+        background: $yellow;
+    }
+}
+
+.custom-amount-button-container{
+    height: 95px;
+    display: flex;
+    align-items: center;
+    // justify-content: center;
+}
+
+.custom-amount-button {
+    background-color: transparent;
+    color: inherit;
+    width: 100px;
+    height: 50px;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
+    margin-left: 20px;
+
+    &:hover {
+        background-color: $yellow;
+    }
+}
+
+.amount-button-selected {
+    background-color: $yellow;
 }
