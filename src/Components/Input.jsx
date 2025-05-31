@@ -10,7 +10,6 @@ export const Input = ({
   required,
   images,
 }) => {
-  console.log("images", images);
   return (
     <div className="input-element-container">
       <label className="input-label">{label}</label>

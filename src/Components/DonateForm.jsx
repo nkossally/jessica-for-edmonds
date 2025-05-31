@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import classNames from "classnames";
 import { Input } from "./Input";
-import { fabClasses } from "@mui/material";
 import { signUp } from "../requests";
 
 export const DonateForm = () => {
@@ -17,7 +16,8 @@ export const DonateForm = () => {
   });
   const [isFormValid, setIsFormValid] = useState(false);
   const [showCustomAmountInput, setShowCustomAmountInput] = useState(false);
-
+  const [settledCardType, setSettledCardType] = useState("");
+  const [formattedCardnumber, setFormattedCardnumber] = useState(false)
   useEffect(() => {
     setIsFormValid(validateForm());
   }, [formData]);
@@ -43,7 +43,8 @@ export const DonateForm = () => {
   const validateForm = () => {
     return (
       validateName(formData.name) &&
-      validateEmail(formData.email)
+      validateEmail(formData.email) &&
+      validateAddress(formData.address)
     );
   };
 
@@ -66,25 +67,96 @@ export const DonateForm = () => {
     return true;
   };
 
-  const handleAmountButton = (customAmount) => () =>{
-    setShowCustomAmountInput(false)
-    setFormData({...formData, amount: customAmount });
-  }
+  const validateAddress = (addressInput) => {
+    if (!addressInput) {
+      setErrors((prev) => ({ ...prev, address: "Please enter your address." }));
+    } else {
+      setErrors((prev) => ({ ...prev, address: "" }));
+    }
+  };
 
-  const handleShowCustomAmount = () =>{
-    setFormData({...formData, amount: 0 });
-    setShowCustomAmountInput(true)
+  const handleAmountButton = (customAmount) => () => {
+    setShowCustomAmountInput(false);
+    setFormData({ ...formData, amount: customAmount });
+  };
+
+  const handleShowCustomAmount = () => {
+    setFormData({ ...formData, amount: 0 });
+    setShowCustomAmountInput(true);
+  };
+
+  function validateCardNumber(cardNumber) {
+    let onlyDigits = cardNumber.replace(/\D/g, "");
+    onlyDigits = onlyDigits.slice(0, 16)
+
+    const cardTypes = [
+      { type: "Visa", regex: /^4\d{12}(\d{3})?$/, length: [13, 16] },
+      {
+        type: "MasterCard",
+        regex: /^5[1-5]\d{14}|^2[2-7]\d{14}$/,
+        length: [16],
+      },
+      { type: "Amex", regex: /^3[47]\d{13}$/, length: [15] },
+      { type: "Discover", regex: /^6(?:011|5\d{2})\d{12}$/, length: [16] },
+    ];
+
+    const type = cardTypes.find((t) => t.regex.test(onlyDigits));
+    const isValidLength = type
+      ? type.length.includes(onlyDigits.length)
+      : false;
+    const isValid = !!type && isValidLength;
+    const cardType = type?.type;
+    setSettledCardType(cardType)
+    setFormattedCardnumber(onlyDigits)
+
+    if(cardType === "Visa" || cardType === "MasterCard" || cardType === "Discover"){
+      if(onlyDigits?.length > 12){
+        setFormattedCardnumber(onlyDigits.slice(0, 4) + "-" + onlyDigits.slice(4, 8) + "-" + onlyDigits.slice(8, 12) + "-" + onlyDigits.slice(12))
+
+      } else if(onlyDigits?.length > 8){
+        setFormattedCardnumber(onlyDigits.slice(0, 4) + "-" + onlyDigits.slice(4, 8) + "-" + onlyDigits.slice(8))
+
+      } else if(onlyDigits?.length > 4){
+        setFormattedCardnumber(onlyDigits.slice(0, 4) + "-" + onlyDigits.slice(4) )
+      }
+    } else if(cardType === "Amex"){
+      if(onlyDigits?.length > 10){
+        setFormattedCardnumber(onlyDigits.slice(0, 5) + "-" + onlyDigits.slice(5, 10) + "-" + onlyDigits.slice(10))
+
+      } else if(onlyDigits?.length > 8){
+        setFormattedCardnumber(onlyDigits.slice(0, 5) + "-" + onlyDigits.slice(5))
+      } 
+    }
+
+    if(!isValid){
+      setErrors((prev) => ({ ...prev, cardNumber:"Please enter a valid card number." }));
+    } else {
+      setErrors((prev) => ({ ...prev, cardNumber:"" }));
+    }
+    console.log('cardType', cardType)
+    console.log(formattedCardnumber)
+    console.log({
+      isValid,
+      cardType,
+    })
+
+    return {
+      isValid,
+      cardType,
+    };
   }
 
   return (
     <form className="form" onSubmit={handleSubmit}>
       <div className="amount-buttons">
         <button onClick={handleAmountButton(10)}> 10</button>
-        <button  onClick={handleAmountButton(20)}> 20</button>
-        <button  onClick={handleAmountButton(100)}> 100</button>
+        <button onClick={handleAmountButton(20)}> 20</button>
+        <button onClick={handleAmountButton(100)}> 100</button>
       </div>
 
-      {!showCustomAmountInput && <button onClick={handleShowCustomAmount}> custom</button>}
+      {!showCustomAmountInput && (
+        <button onClick={handleShowCustomAmount}> custom</button>
+      )}
 
       {showCustomAmountInput && (
         <Input
@@ -122,7 +194,7 @@ export const DonateForm = () => {
         label={"Your Address"}
         type={"text"}
         value={formData.address}
-        handleChange={handleChange()}
+        handleChange={handleChange(validateAddress)}
         required={false}
       />
       <Input
@@ -130,8 +202,8 @@ export const DonateForm = () => {
         type="text"
         error={errors.cardNumber}
         label={"Card Number"}
-        value={formData.cardNumber}
-        handleChange={handleChange()}
+        value={formattedCardnumber}
+        handleChange={handleChange(validateCardNumber)}
         required={true}
         images={[
           process.env.PUBLIC_URL + "/" + "american-express.svg",
