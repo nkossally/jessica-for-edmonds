@@ -9,9 +9,13 @@ export const Input = ({
   handleChange,
   required,
   images,
+  maxlength,
 }) => {
   const imagesClass = images?.length > 1 ? "card-images-container" : "card-images-container-small" 
-
+  let trimmedValue = value
+  if(maxlength){
+    trimmedValue=trimmedValue.slice(0, maxlength);
+  }
   return (
     <div className="input-element-container">
       <label className="input-label">{label}</label>
@@ -19,11 +23,12 @@ export const Input = ({
         <input
           type={type}
           name={name}
+          maxlength={maxlength}
           className={classNames(
             "input-element",
             error && "input-element-error"
           )}
-          value={value}
+          value={trimmedValue}
           onChange={handleChange}
           required={required}
         />

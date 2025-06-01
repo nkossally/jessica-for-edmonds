@@ -26,7 +26,6 @@ export const DonateForm = () => {
   const [settledCardType, setSettledCardType] = useState("");
   const [formattedCardnumber, setFormattedCardnumber] = useState("");
   const [selectedAmountButton, setSelectedAmountButton] = useState("");
-  const [formattedExpiration, setFormattedExpiration] = useState("");
 
   useEffect(() => {
     setIsFormValid(validateForm());
@@ -49,7 +48,6 @@ export const DonateForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const resp = await signUp(formData);
-    console.log("resp", resp);
   };
 
   const validateForm = () => {
@@ -191,7 +189,6 @@ export const DonateForm = () => {
   }
 
   const validateAmount = (amount) => {
-    console.log("amount", amount);
     if (!amount) {
       setErrors((prev) => ({
         ...prev,
@@ -202,6 +199,28 @@ export const DonateForm = () => {
       setErrors((prev) => ({ ...prev, amount: "" }));
       return true;
     }
+  };
+
+  const validateExpirationDate = (expirationInput) => {
+
+    console.log("expirationInput", expirationInput)
+    if (!expirationInput || expirationInput.length < 4) {
+      setErrors((prev) => ({
+        ...prev,
+        expiration: "Please enter a valid expiration date.",
+      }));
+    } else {
+      setErrors((prev) => ({ ...prev, expiration: "" }));
+    }
+    if (!expirationInput) {
+      return;
+    }
+    const numbersOnly = expirationInput.replace(/\D/g, "")
+    let trimmed = numbersOnly.slice(0, 4);
+    if (trimmed.length > 2) {
+      trimmed = trimmed.slice(0, 2) + " / " + trimmed.slice(2);
+    }
+    setFormData({...formData, expiration: trimmed})
   };
 
   let images = [
@@ -330,26 +349,28 @@ export const DonateForm = () => {
         error={errors.expiration}
         label={"Expiration Date"}
         value={formData.expiration}
-        handleChange={handleChange()}
+        handleChange={handleChange(validateExpirationDate)}
         required={true}
       />
       <Input
-        name="cardNumber"
-        type="text"
+        name="cvccvv"
+        type="number"
         error={errors.cvccvv}
         label={"CVC/CVV"}
         value={formData.cvccvv}
         handleChange={handleChange()}
-        required={false}
+        maxlength={3}
+        required={true}
       />
       <Input
         name="zip"
-        type="text"
+        type="number"
         error={errors.zip}
         label={"Zip Code"}
         value={formData.zip}
         handleChange={handleChange()}
-        required={false}
+        maxlength={5}
+        required={true}
       />
       <button
         type="submit"
