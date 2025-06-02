@@ -19,7 +19,7 @@ export const Input = ({
   const labelAndStar = label + (required ? " *" : "")
   return (
     <div className="input-element-container">
-      <label className="input-label">{label}</label>
+      {value && <label className="input-label">{labelAndStar}</label>}
       <div className="input-and-images">
         <input
           type={type}

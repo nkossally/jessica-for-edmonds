@@ -431,7 +431,7 @@ code {
 .input-element {
     border: 1px solid #999999;
     background-color: #E9F0FE;
-    height: 40px;
+    height: 45px;
     border-radius: 5px;
     width: 580px;
 
@@ -446,12 +446,16 @@ code {
 }
 
 .input-label {
-    color: #2519D2;
-    font-size: 17px;
+    // color: #2519D2;
+    font-size: 14px;
+    color: gray;
     // font-family: sans-serif;
     font-family: $general-font;
     font-weight: bold;
     margin-bottom: 5px;
+    position: relative;
+    top: 23px;
+    left: 8px;
 
 }
 

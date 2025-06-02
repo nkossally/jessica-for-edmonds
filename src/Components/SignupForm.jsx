@@ -46,7 +46,12 @@ export const SignupForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    const resp  = await signUp(formData)
+    const isValid = validateForm()
+    console.log("sign up for validity", isValid)
+    if(isValid){
+      const resp  = await signUp(formData)
+      console.log("resp", resp)
+    }
   };
 
   const validateForm = () => {
