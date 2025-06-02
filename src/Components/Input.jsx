@@ -19,7 +19,7 @@ export const Input = ({
   const labelAndStar = label + (required ? " *" : "")
   return (
     <div className="input-element-container">
-      {value && <label className="input-label">{labelAndStar}</label>}
+      <label className="input-label">{value ? labelAndStar : ""}</label>
       <div className="input-and-images">
         <input
           type={type}
@@ -37,7 +37,7 @@ export const Input = ({
         <div className={imagesClass}>
           {images &&
             images.map((imageSrc) => {
-              return <img src={imageSrc} className={classNames("card-logo")} />;
+              return <img src={imageSrc} key={imageSrc} className={classNames("card-logo")} />;
             })}
         </div>
       </div>

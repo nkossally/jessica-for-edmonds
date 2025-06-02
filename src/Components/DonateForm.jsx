@@ -21,21 +21,26 @@ export const DonateForm = () => {
     zip: "",
     amount: "",
   });
-  const [isFormValid, setIsFormValid] = useState(false);
   const [showCustomAmountInput, setShowCustomAmountInput] = useState(false);
   const [settledCardType, setSettledCardType] = useState("");
   const [formattedCardnumber, setFormattedCardnumber] = useState("");
   const [selectedAmountButton, setSelectedAmountButton] = useState("");
   const [errors, setErrors] = useState({});
+  const [isFormValid, setIsFormValid] = useState(false)
 
-  useEffect(() => {
-    setIsFormValid(validateForm());
-  }, [formData, errors]);
+  useEffect(()=>{
+    setIsFormValid(validateForm())
 
+  }, [formData])
 
   const handleChange = (validationCallback) => (e) => {
     const { name, value } = e.target;
-    let newFormData = { ...formData, [name]: value };
+    let newValue = value
+    if(e.target.maxLength !== -1 && newValue){
+      newValue = newValue.slice(0, e.target.maxLength)
+    }
+    let newFormData = { ...formData, [name]: newValue };
+
 
     setFormData(newFormData);
     if (validationCallback) {
@@ -94,8 +99,10 @@ export const DonateForm = () => {
   const validateAddress = (addressInput) => {
     if (!addressInput) {
       setErrors((prev) => ({ ...prev, address: "Please enter your address." }));
+      return false;
     } else {
       setErrors((prev) => ({ ...prev, address: "" }));
+      return true
     }
   };
 
@@ -110,7 +117,7 @@ export const DonateForm = () => {
   };
 
   const validateExpiration = () => {
-    if (formData.expiration && formData.expiration.length === 4) {
+    if (formData.expiration && formData.expiration.length === 7) {
       setErrors((prev) => ({ ...prev,  expiration: "" }));
       return true;
     } else {
@@ -285,7 +292,7 @@ export const DonateForm = () => {
           <button
             className={classNames(
               "amount-button",
-              selectedAmountButton == 10 ? "amount-button-selected" : ""
+              selectedAmountButton === 10 ? "amount-button-selected" : ""
             )}
             key="ammount-10"
             onClick={handleAmountButton(10)}
@@ -296,7 +303,7 @@ export const DonateForm = () => {
           <button
             className={classNames(
               "amount-button",
-              selectedAmountButton == 20 ? "amount-button-selected" : ""
+              selectedAmountButton === 20 ? "amount-button-selected" : ""
             )}
             key="ammount-20"
             onClick={handleAmountButton(20)}
@@ -307,7 +314,7 @@ export const DonateForm = () => {
           <button
             className={classNames(
               "amount-button",
-              selectedAmountButton == 100 ? "amount-button-selected" : ""
+              selectedAmountButton === 100 ? "amount-button-selected" : ""
             )}
             key="ammount-100"
             onClick={handleAmountButton(100)}
