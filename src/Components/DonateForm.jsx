@@ -26,12 +26,12 @@ export const DonateForm = () => {
   const [settledCardType, setSettledCardType] = useState("");
   const [formattedCardnumber, setFormattedCardnumber] = useState("");
   const [selectedAmountButton, setSelectedAmountButton] = useState("");
+  const [errors, setErrors] = useState({});
 
   useEffect(() => {
     setIsFormValid(validateForm());
-  }, [formData]);
+  }, [formData, errors]);
 
-  const [errors, setErrors] = useState({});
 
   const handleChange = (validationCallback) => (e) => {
     const { name, value } = e.target;
@@ -56,12 +56,19 @@ export const DonateForm = () => {
     validateAddress(formData.address);
     validateCardNumber(formData.cardNumber);
     validateAmount(formData.amount);
+    validateExpiration();
+    validateCvc();
+    validateZipCode();
+
     return (
       validateName(formData.name) &&
       validateEmail(formData.email) &&
       validateAddress(formData.address) &&
       validateCardNumber(formData.cardNumber) &&
-      validateAmount(formData.amount)
+      validateAmount(formData.amount) &&
+      validateExpiration() &&
+      validateCvc() &&
+      validateZipCode()
     );
   };
 
@@ -89,6 +96,39 @@ export const DonateForm = () => {
       setErrors((prev) => ({ ...prev, address: "Please enter your address." }));
     } else {
       setErrors((prev) => ({ ...prev, address: "" }));
+    }
+  };
+
+  const validateCvc = () => {
+    if (formData.cvccvv && formData.cvccvv.length === 3) {
+      setErrors((prev) => ({ ...prev, cvccvv: "" }));
+      return true;
+    } else {
+      setErrors((prev) => ({ ...prev, cvccvv: "Please enter a valid CVC/CVV number." }));
+      return false;
+    }
+  };
+
+  const validateExpiration = () => {
+    if (formData.expiration && formData.expiration.length === 4) {
+      setErrors((prev) => ({ ...prev,  expiration: "" }));
+      return true;
+    } else {
+      setErrors((prev) => ({ ...prev, 
+        ...prev,
+        expiration: "Please enter the expiration date for your card.",
+      }));
+      return false;
+    }
+  };
+
+  const validateZipCode = () => {
+    if (formData.zip && formData.zip.length === 5) {
+      setErrors({ ...errors, zip: "" });
+      return true;
+    } else {
+      setErrors({ ...errors, zip: "Please enter a valid zip code." });
+      return false;
     }
   };
 
@@ -202,8 +242,6 @@ export const DonateForm = () => {
   };
 
   const validateExpirationDate = (expirationInput) => {
-
-    console.log("expirationInput", expirationInput)
     if (!expirationInput || expirationInput.length < 4) {
       setErrors((prev) => ({
         ...prev,
@@ -215,12 +253,12 @@ export const DonateForm = () => {
     if (!expirationInput) {
       return;
     }
-    const numbersOnly = expirationInput.replace(/\D/g, "")
+    const numbersOnly = expirationInput.replace(/\D/g, "");
     let trimmed = numbersOnly.slice(0, 4);
     if (trimmed.length > 2) {
       trimmed = trimmed.slice(0, 2) + " / " + trimmed.slice(2);
     }
-    setFormData({...formData, expiration: trimmed})
+    setFormData({ ...formData, expiration: trimmed });
   };
 
   let images = [
@@ -359,7 +397,7 @@ export const DonateForm = () => {
         label={"CVC/CVV"}
         value={formData.cvccvv}
         handleChange={handleChange()}
-        maxlength={3}
+        maxLength={3}
         required={true}
       />
       <Input
@@ -369,7 +407,7 @@ export const DonateForm = () => {
         label={"Zip Code"}
         value={formData.zip}
         handleChange={handleChange()}
-        maxlength={5}
+        maxLength={5}
         required={true}
       />
       <button

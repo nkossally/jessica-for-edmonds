@@ -5,7 +5,6 @@ const API_URL =
     : "https://scrabble-backend.vercel.app";
 
 export const signUp = async (formData) => {
-  console.log("API_URL", API_URL);
   try {
     const resp = await fetch(API_URL + "/sign-up", {
       method: "POST",

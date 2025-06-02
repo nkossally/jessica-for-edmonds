@@ -50,6 +50,9 @@ export const SignupForm = () => {
   };
 
   const validateForm = () => {
+    validateName(formData.name)
+    validateEmail(formData.email)
+    validateNumber(formData.number)
     return validateName(formData.name) && validateEmail(formData.email) && validateNumber(formData.number)
   };
 
