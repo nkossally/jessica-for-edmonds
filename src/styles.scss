@@ -424,8 +424,8 @@ code {
 .input-element-container {
     display: flex;
     flex-direction: column;
-    margin: 5px 20px;
-    height: 90px;
+    margin: 5px 0px;
+    height: 80px;
 }
 
 .input-element {
@@ -434,6 +434,7 @@ code {
     height: 45px;
     border-radius: 5px;
     width: 580px;
+    font-size: 16px;
 
     &:focus {
         background-color: white;
@@ -447,7 +448,7 @@ code {
 
 .input-label {
     // color: #2519D2;
-    font-size: 14px;
+    font-size: 12px;
     color: gray;
     // font-family: sans-serif;
     font-family: $general-font;
@@ -457,6 +458,7 @@ code {
     top: 23px;
     left: 8px;
     // border: 1px solid brown;
+    height: 18px;
 
 }
 
