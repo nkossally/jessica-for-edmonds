@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import classNames from "classnames";
 import { Input } from "./Input";
 import { fabClasses } from "@mui/material";
-import { signUp } from "../requests";
+import { signUp, debug } from "../requests";
 
 export const SignupForm = () => {
   const [formData, setFormData] = useState({
@@ -48,7 +48,9 @@ export const SignupForm = () => {
     e.preventDefault()
     const isValid = validateForm()
     if(isValid){
-      const resp  = await signUp(formData)
+      // const resp  = await signUp(formData)
+      // console.log(resp)
+      console.log("submitted")
     }
   };
 
@@ -133,7 +135,7 @@ export const SignupForm = () => {
   };
 
   return (
-    <form className="form" onSubmit={handleSubmit}>
+    <form  onSubmit={handleSubmit}>
       <Input
         name={"name"}
         error={errors.name}

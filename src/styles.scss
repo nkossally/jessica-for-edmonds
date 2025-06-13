@@ -5,6 +5,7 @@ $nav-logo-width: 200px;
 $american-blue: #0157ae;
 $american-red: #d42729;
 $dark-gray: #12110B;
+$green: #2EB24B;
 
 // $general-font: "Roboto";
 // $general-font: "Times New Roman";
@@ -494,6 +495,7 @@ code {
     display: flex;
     flex-direction: column;
     align-items: center;
+
 }
 
 .volunteer-title {
@@ -511,32 +513,45 @@ code {
 }
 
 .submit-volunteer {
-    width: 585px;
-    height: 60px;
-    margin: 20px 20px;
-    background-color: #6E70E3;
+    width: 400px;
+    height: 70px;
+    margin: 20px 0px;
+    background-color: $american-red;
     color: white;
     border-radius: 20px;
     font-family: unionGothic;
     font-size: 25px;
     font-weight: bold;
+    opacity: .5;
+    border: 1px solid #d4272B;
+
+
+    @media (max-width: 1000px) {
+        width: 100%;
+    }
 
 
 }
 
 .submit-volunteer-valid {
-    width: 585px;
-    height: 60px;
-    margin: 20px 20px;
-    background-color: #261AD1;
+    width: 400px;
+    height: 70px;
+    margin: 20px 0px;
+    background-color: $green;
     color: white;
     border-radius: 20px;
     font-family: unionGothic;
     font-size: 25px;
     font-weight: bold;
+    border: 1px solid #2EB26B;
+
+    @media (max-width: 1000px) {
+        width: 100%;
+    }
 
     &:hover {
-        background-color: #2A1CE6;
+        background-color: #2EB26B;
+
     }
 }
 
@@ -578,7 +593,6 @@ code {
 }
 
 .subscribe-option-input {
-    margin-left: 20px;
 }
 
 .amount-buttons-container {
@@ -637,4 +651,10 @@ code {
 
 .required-star {
     color: red;
+}
+
+.donate-form-container{
+    display: flex;
+    flex-direction: column;
+    margin: 100px 20px;
 }

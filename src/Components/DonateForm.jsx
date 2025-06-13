@@ -286,7 +286,7 @@ export const DonateForm = () => {
   }
 
   return (
-    <form className="form" onSubmit={handleSubmit}>
+    <form className="donate-form-container" onSubmit={handleSubmit}>
       <div className="custom-amounts-and-error">
         <div className="amount-buttons-container">
           <button
