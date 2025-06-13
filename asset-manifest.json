@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/jessica-for-edmonds/static/css/main.5dd6e74b.css",
+    "main.css": "/jessica-for-edmonds/static/css/main.7821b920.css",
     "main.js": "/jessica-for-edmonds/static/js/main.ae0ee231.js",
     "static/js/453.2ad51f16.chunk.js": "/jessica-for-edmonds/static/js/453.2ad51f16.chunk.js",
     "static/media/logo.svg": "/jessica-for-edmonds/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
     "index.html": "/jessica-for-edmonds/index.html",
-    "main.5dd6e74b.css.map": "/jessica-for-edmonds/static/css/main.5dd6e74b.css.map",
+    "main.7821b920.css.map": "/jessica-for-edmonds/static/css/main.7821b920.css.map",
     "main.ae0ee231.js.map": "/jessica-for-edmonds/static/js/main.ae0ee231.js.map",
     "453.2ad51f16.chunk.js.map": "/jessica-for-edmonds/static/js/453.2ad51f16.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.5dd6e74b.css",
+    "static/css/main.7821b920.css",
     "static/js/main.ae0ee231.js"
   ]
 }
