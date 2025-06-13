@@ -333,7 +333,7 @@ export const DonateForm = () => {
             onClick={handleShowCustomAmount}
           >
             {" "}
-            custom
+            Enter Custom Amount
           </button>
         </div>
       )}

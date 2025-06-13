@@ -135,7 +135,7 @@ export const SignupForm = () => {
   };
 
   return (
-    <form  onSubmit={handleSubmit}>
+    <form className="sign-up-form-container" onSubmit={handleSubmit}>
       <Input
         name={"name"}
         error={errors.name}

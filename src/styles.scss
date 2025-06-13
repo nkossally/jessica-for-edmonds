@@ -6,6 +6,7 @@ $american-blue: #0157ae;
 $american-red: #d42729;
 $dark-gray: #12110B;
 $green: #2EB24B;
+$money-green: #85bb65;
 
 // $general-font: "Roboto";
 // $general-font: "Times New Roman";
@@ -425,17 +426,22 @@ code {
 .input-element-container {
     display: flex;
     flex-direction: column;
-    margin: 5px 0px;
     height: 80px;
+
 }
 
 .input-element {
+
     border: 1px solid #999999;
     background-color: #E9F0FE;
     height: 45px;
     border-radius: 5px;
     width: 580px;
     font-size: 16px;
+
+    @media (max-width: 1000px) {
+        width: 500px;
+    }
 
     &:focus {
         background-color: white;
@@ -527,7 +533,7 @@ code {
 
 
     @media (max-width: 1000px) {
-        width: 100%;
+        width: 90%;
     }
 
 
@@ -546,7 +552,7 @@ code {
     border: 1px solid #2EB26B;
 
     @media (max-width: 1000px) {
-        width: 100%;
+        width: 90%;
     }
 
     &:hover {
@@ -592,13 +598,11 @@ code {
     margin: 0px 40px;
 }
 
-.subscribe-option-input {
-}
+.subscribe-option-input {}
 
 .amount-buttons-container {
     display: flex;
     flex-direction: row;
-    margin-left: 20px;
 }
 
 .amount-button {
@@ -610,38 +614,46 @@ code {
     font: inherit;
     cursor: pointer;
     outline: inherit;
-    margin-left: 20px;
+    margin-right: 20px;
+    border: 1px solid gray;
+    border-radius: 5px;
 
     &:hover {
-        background: $yellow;
+        background-color: $money-green;
+        border: 1px solid $green;
+
+
     }
+
 }
 
 .custom-amount-button-container {
-    height: 95px;
+    height: 80px;
     display: flex;
     align-items: center;
-    // justify-content: center;
 }
 
 .custom-amount-button {
     background-color: transparent;
     color: inherit;
-    width: 100px;
-    height: 50px;
+    width: 340px;
+    height: 45px;
     padding: 0;
     font: inherit;
     cursor: pointer;
     outline: inherit;
-    margin-left: 20px;
+    border: 1px solid gray;
+    border-radius: 5px;
 
     &:hover {
-        background-color: $yellow;
+        background-color: #F5F5F5;
     }
 }
 
 .amount-button-selected {
-    background-color: $yellow;
+    border: 1px solid $green;
+
+    background-color: $money-green;
 }
 
 .custom-amounts-and-error {
@@ -653,8 +665,17 @@ code {
     color: red;
 }
 
-.donate-form-container{
+.donate-form-container {
     display: flex;
     flex-direction: column;
     margin: 100px 20px;
+}
+
+.sign-up-form-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin: 20px 20px;
+    align-items: center;
+
 }
