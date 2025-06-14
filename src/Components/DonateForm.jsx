@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import classNames from "classnames";
 import { Input } from "./Input";
-import { signUp } from "../requests";
+import { donate } from "../requests";
 
 const CARD_TYPES = {
   VISA: "VISA",
@@ -26,21 +26,22 @@ export const DonateForm = () => {
   const [formattedCardnumber, setFormattedCardnumber] = useState("");
   const [selectedAmountButton, setSelectedAmountButton] = useState("");
   const [errors, setErrors] = useState({});
-  const [isFormValid, setIsFormValid] = useState(false)
+  const [isFormValid, setIsFormValid] = useState(false);
 
-  useEffect(()=>{
-    setIsFormValid(validateForm())
+  useEffect(() => {
+    setIsFormValid(validateForm());
+  }, [formData]);
 
-  }, [formData])
+  useEffect(() => {
+  }, [errors]);
 
   const handleChange = (validationCallback) => (e) => {
     const { name, value } = e.target;
-    let newValue = value
-    if(e.target.maxLength !== -1 && newValue){
-      newValue = newValue.slice(0, e.target.maxLength)
+    let newValue = value;
+    if (e.target.maxLength !== -1 && newValue) {
+      newValue = newValue.slice(0, e.target.maxLength);
     }
     let newFormData = { ...formData, [name]: newValue };
-
 
     setFormData(newFormData);
     if (validationCallback) {
@@ -51,8 +52,11 @@ export const DonateForm = () => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    const resp = await signUp(formData);
+    try {
+      e.preventDefault();
+      const resp = await donate(formData);
+      console.log("resp", resp);
+    } catch {}
   };
 
   const validateForm = () => {
@@ -62,7 +66,7 @@ export const DonateForm = () => {
     validateCardNumber(formData.cardNumber);
     validateAmount(formData.amount);
     validateExpiration();
-    validateCvc();
+    validateCvc(formData.cvccvv);
     validateZipCode();
 
     return (
@@ -72,7 +76,7 @@ export const DonateForm = () => {
       validateCardNumber(formData.cardNumber) &&
       validateAmount(formData.amount) &&
       validateExpiration() &&
-      validateCvc() &&
+      validateCvc(formData.cvccvv) &&
       validateZipCode()
     );
   };
@@ -102,26 +106,33 @@ export const DonateForm = () => {
       return false;
     } else {
       setErrors((prev) => ({ ...prev, address: "" }));
-      return true
+      return true;
     }
   };
 
-  const validateCvc = () => {
-    if (formData.cvccvv && formData.cvccvv.length === 3) {
+  const validateCvc = (cvccvvInput) => {
+    console.log(cvccvvInput, cvccvvInput.length === 3)
+    if (cvccvvInput && cvccvvInput.length === 3) {
+      console.log("seeting no errors")
       setErrors((prev) => ({ ...prev, cvccvv: "" }));
       return true;
     } else {
-      setErrors((prev) => ({ ...prev, cvccvv: "Please enter a valid CVC/CVV number." }));
+      console.log("setting errors")
+      setErrors((prev) => ({
+        ...prev,
+        cvccvv: "Please enter a valid CVC/CVV number.",
+      }));
       return false;
     }
   };
 
   const validateExpiration = () => {
     if (formData.expiration && formData.expiration.length === 7) {
-      setErrors((prev) => ({ ...prev,  expiration: "" }));
+      setErrors((prev) => ({ ...prev, expiration: "" }));
       return true;
     } else {
-      setErrors((prev) => ({ ...prev, 
+      setErrors((prev) => ({
+        ...prev,
         ...prev,
         expiration: "Please enter the expiration date for your card.",
       }));
@@ -285,6 +296,7 @@ export const DonateForm = () => {
     images = [process.env.PUBLIC_URL + "/" + "discover.svg"];
   }
 
+  console.log("errors", errors)
   return (
     <form className="donate-form-container" onSubmit={handleSubmit}>
       <div className="custom-amounts-and-error">

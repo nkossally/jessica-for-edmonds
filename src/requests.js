@@ -25,6 +25,29 @@ export const signUp = async (formData) => {
   } catch {}
 };
 
+export const donate = async (formData) => {
+  try {
+    const resp = await fetch(API_URL + "/donate", {
+      method: "POST",
+      body: JSON.stringify({
+        name: formData.name,
+        email: formData.email,
+        address: formData.address,
+        cardNumber: formData.cardNumber,
+        expiration: formData.expiration,
+        cvccvv: formData.cvccvv,
+        zip: formData.zip,
+        amount: formData.amount,
+      }),
+      headers: {
+        "Content-type": "application/json",
+      },
+    });
+    const json = await resp.json();
+    return json;
+  } catch {}
+};
+
 export const debug = async () => {
   try {
     const resp = await fetch(API_URL + "/debug-env", {
@@ -34,8 +57,6 @@ export const debug = async () => {
       },
     });
     const json = await resp.json();
-    console.log(json)
     return json;
   } catch {}
 };
-

@@ -48,9 +48,8 @@ export const SignupForm = () => {
     e.preventDefault()
     const isValid = validateForm()
     if(isValid){
-      // const resp  = await signUp(formData)
-      // console.log(resp)
-      console.log("submitted")
+      const resp  = await signUp(formData)
+      console.log(resp)
     }
   };
 
