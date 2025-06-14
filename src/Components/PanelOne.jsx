@@ -3,62 +3,31 @@ import classNames from "classnames";
 export const PanelOne = () => {
   return (
     <div className={classNames("panel")}>
-        <div className="inner-panel">
-
-      <div className="panel-title"> why I’m running</div>
-      <div className="panel-text">
-        Jessica Bachman Finish this sentence: Jane is running for Council to
-        help Emdonds pursue its ambitious agenda for economic prosperity, social
-        cohesion and cultural
+      <div className="inner-panel">
+        <div className="panel-title"> why I’m running</div>
+        <div className="panel-text">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ac erat
+          sed enim tincidunt tempor. Quisque at accumsan ex. Nulla tincidunt
+          massa ligula, sed egestas erat mattis eu. Vivamus dignissim lectus
+          nibh, quis euismod sem pretium nec. Sed molestie vel tortor et
+          rhoncus. Nullam ut arcu ut libero congue tempus. Maecenas pharetra eu
+          nisl sed lobortis. Cras iaculis orci purus, a sollicitudin elit
+          iaculis eget. Sed ultricies rhoncus tempus. In et ullamcorper risus,
+          at vulputate nulla. Cras aliquet orci nec mauris scelerisque, ut
+          imperdiet felis molestie. Curabitur elementum neque lectus. Donec at
+          tellus eros. Proin non feugiat lectus. Mauris rutrum rhoncus
+          fermentum. Duis mi dolor, sollicitudin in mi nec, laoreet volutpat
+          dolor.
+        </div>
+        <div className="panel-text">
+          Nunc finibus finibus malesuada. Nullam non ornare turpis. In iaculis,
+          leo ac sagittis rhoncus, felis tellus efficitur mauris, eget faucibus
+          dolor tellus sit amet nunc. Suspendisse sit amet finibus mauris.
+          Quisque sollicitudin nulla quis fringilla maximus. Nullam diam magna,
+          efficitur lacinia pellentesque sit amet, tempor in nisl. Sed faucibus
+          aliquet neque varius sagittis. Nullam ac varius velit, a ornare nisl.
+        </div>
       </div>
-      <div className="panel-text">
-        bring back real fiscal oversight and to make sure City Hall works for
-        the people of Edmonds—not just for itself.
-      </div>
-      <div className="panel-text">
-        Jessica Bachman is running for Council to hold City Hall accountable to
-        making, curb wasteful habits, and focus on investments that deliver real
-        value to Edmonds residents.”
-      </div>
-      <div className="panel-text">
-        Jessica Bachman is running for Council to bring transparency, fiscal
-        oversight, and responsible budgeting back to Edmonds.
-      </div>
-      <div className="panel-text">
-        Jessica Bachman is running for a Council position to bring rigorous
-        oversight and evidence-based decision making back to Edmonds.
-      </div>
-      <div className="panel-text">
-        Jessica Bachman is running for a Council position to ensure that the
-        City of Edmonds becomes accountable to its residents—not just to itself.
-      </div>
-      <div className="panel-text">
-        Jessica Bachman is running for Council to bring back real oversight over
-        Edmonds City Hall and to replace wasteful spending with
-        community-focused investments.
-      </div>
-      <div className="panel-text">
-        Jessica Bachman is running for Council to bring [advocate for] smart
-        budgeting, results-based decision making, and community-focused
-        investments to Edmonds.
-      </div>
-      <div className="panel-text">
-        Jessica Bachman is running for Council to put Edmonds back on sound
-        financial footing, cut down on wasteful spending, and promote
-        evidence-based policy making.
-      </div>
-      <div className="panel-text"></div>
-      <div className="panel-text">
-        Jessica Bachman is running for Edmonds City Council to demand
-        accountability, transparency, and mindful spending from city hall.
-      </div>
-      <div className="panel-text">
-        Jessica Bachman is running for Council to demand accountability,
-        transparency, and mindful spending from city hall on behalf of all
-        Edmonds residents.
-      </div>
-              </div>
-
     </div>
   );
 };
