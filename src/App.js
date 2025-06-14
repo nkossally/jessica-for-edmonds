@@ -29,6 +29,12 @@ function App() {
     };
   }, []);
 
+  useEffect(() => {
+    if (window.innerWidth < 1000) {
+      setIsVisible(true);
+    }
+  }, [window.innerWidth]);
+
   let baseUrl = `${window.location.protocol}//${window.location.host}`;
   if (baseUrl[baseUrl.length - 1] !== "/") {
     baseUrl += "/";

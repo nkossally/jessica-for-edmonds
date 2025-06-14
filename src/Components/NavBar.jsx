@@ -97,6 +97,7 @@ export const NavBar = () => {
           className={classNames("fade-in", isModalFadingOut ? "fade-out" : "")}
         >
           <div className="modal-nav">
+            <div className="modal-nav-inner">
             <button
               onClick={handleClose}
               className={classNames("x-button", "undo-button-styles")}
@@ -143,6 +144,7 @@ export const NavBar = () => {
               {" "}
               Donate
             </button>
+          </div>
           </div>
         </Modal>
       </div>
