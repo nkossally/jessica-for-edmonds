@@ -16,8 +16,8 @@ $general-font: 'Roboto', sans-serif;
 $light-blue: #F5FBFF;
 $darker-light-blue: #DCEEFF;
 
-$input-width-large:  580px;
-$input-width-small:  500px;
+$input-width-large: 580px;
+$input-width-small: 500px;
 
 
 input::-webkit-outer-spin-button,
@@ -74,6 +74,11 @@ code {
 
 .add-margin-for-nav-bar {
     margin-top: 70px;
+}
+
+.nav-bar-empty {
+    width: 100%;
+    height: 70px;
 }
 
 
@@ -338,10 +343,10 @@ code {
     font-size: 10px;
     background-color: gray;
     color: white;
-  box-shadow: 0 -5px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 -5px 10px rgba(0, 0, 0, 0.2);
 }
 
-.footer-text{
+.footer-text {
     font-size: 12px;
     margin: 0px 10px;
 }
@@ -379,7 +384,7 @@ code {
     @media (min-width: 1000px) {
         flex-direction: row;
         height: 600px;
-            // font-size: 1px;
+        // font-size: 1px;
     }
 }
 
@@ -716,8 +721,7 @@ code {
     // margin: 100px 20px;
     align-items: center;
 
-    @media (max-width: 1000px) {
-    }
+    @media (max-width: 1000px) {}
 
 }
 

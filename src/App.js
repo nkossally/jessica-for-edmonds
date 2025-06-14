@@ -42,6 +42,7 @@ function App() {
   return (
     <HashRouter>
       {isVisible && <NavBar />}
+      {!isVisible && <div className="nav-bar-empty "></div>}
       <div className={isVisible ? "add-margin-for-nav-bar" : ""}>
         <Routes>
           <Route path="/" element={<Home />} />
