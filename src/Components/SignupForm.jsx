@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
-import classNames from "classnames";
 import { Input } from "./Input";
 import { fabClasses } from "@mui/material";
-import { signUp, debug } from "../requests";
+import { signUp } from "../requests";
+import { Error } from "./Error";
+import { SuccessVolunteer } from "./SuccessVolunteer";
+import { Loader } from "./Loader";
 
 export const SignupForm = () => {
   const [formData, setFormData] = useState({
@@ -13,6 +15,9 @@ export const SignupForm = () => {
     subscribeOption: false,
   });
   const [isFormValid, setIsFormValid] = useState(false)
+  const [hasSubmissionError, setHasSubmissionError] = useState(false)
+  const [showSuccess, setShowSuccess] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
 
   useEffect(()=>{
     setIsFormValid(validateForm())
@@ -45,11 +50,22 @@ export const SignupForm = () => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    const isValid = validateForm()
-    if(isValid){
-      const resp  = await signUp(formData)
-      console.log(resp)
+    try {
+      e.preventDefault();
+      const isValid = validateForm();
+      if (isValid) {
+        setIsLoading(true)
+        const resp = await signUp(formData);
+        setIsLoading(false)
+        if(!resp){
+          setHasSubmissionError(true);
+        } else{
+          setShowSuccess(true)
+        }
+      }
+    } catch(error) {
+      setIsLoading(false)
+      setHasSubmissionError(true);
     }
   };
 
@@ -132,6 +148,18 @@ export const SignupForm = () => {
     setErrors((prev) => ({ ...prev, email: "" }));
     return true;
   };
+
+  if(hasSubmissionError){
+    return <Error handleClose={()=>setHasSubmissionError(false)}></Error>
+  }
+
+  if(showSuccess){
+    return <SuccessVolunteer handleClose={()=>setShowSuccess(false)}></SuccessVolunteer>
+  }
+
+  if(isLoading){
+    return <Loader />
+  }
 
   return (
     <form className="sign-up-form-container" onSubmit={handleSubmit}>

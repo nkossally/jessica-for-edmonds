@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import classNames from "classnames";
 import { Input } from "./Input";
 import { donate } from "../requests";
+import { Error } from "./Error";
+import { SuccessDonate } from "./SuccessDonate";
 
 const CARD_TYPES = {
   VISA: "VISA",
