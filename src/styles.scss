@@ -16,6 +16,10 @@ $general-font: 'Roboto', sans-serif;
 $light-blue: #F5FBFF;
 $darker-light-blue: #DCEEFF;
 
+$input-width-large:  580px;
+$input-width-small:  500px;
+
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -webkit-appearance: none;
@@ -431,6 +435,15 @@ code {
     display: flex;
     flex-direction: column;
     height: 80px;
+    width: $input-width-large;
+
+    @media (max-width: 1000px) {
+        width: $input-width-small;
+    }
+
+    max-width: 90vw;
+
+
 
 }
 
@@ -440,11 +453,11 @@ code {
     background-color: #E9F0FE;
     height: 45px;
     border-radius: 5px;
-    width: 580px;
+    width: $input-width-large;
     font-size: 16px;
 
     @media (max-width: 1000px) {
-        width: 500px;
+        width: $input-width-small;
     }
 
     &:focus {
@@ -470,7 +483,6 @@ code {
     position: relative;
     top: 23px;
     left: 8px;
-    // border: 1px solid brown;
     height: 18px;
 
 }
@@ -507,7 +519,7 @@ code {
     display: flex;
     flex-direction: column;
     margin: 100px 20px;
-
+    align-items: center;
 }
 
 .volunteer-title {
@@ -673,6 +685,7 @@ code {
 .donate-form-container {
     display: flex;
     flex-direction: column;
+    align-items: center;
     margin: 100px 20px;
 
     @media (max-width: 1000px) {
@@ -683,10 +696,36 @@ code {
 .sign-up-form-container {
     display: flex;
     flex-direction: column;
+    align-items: center;
+
     margin: 100px 20px;
 
     @media (max-width: 1000px) {
         margin: 30px 10px;
     }
 
+}
+
+.donate-container {
+    display: flex;
+    flex-direction: column;
+    // width: 100vw;
+    // margin: 100px 20px;
+    align-items: center;
+
+    @media (max-width: 1000px) {
+    }
+
+}
+
+.donate-title {
+    font-family: $general-font;
+    font-size: 40px;
+    color: $american-blue;
+    width: 625px;
+    margin-top: 30px;
+    text-align: center;
+
+    @media (max-width: 1000px) {
+    }
 }
