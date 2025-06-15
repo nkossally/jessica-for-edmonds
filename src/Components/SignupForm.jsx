@@ -17,7 +17,7 @@ export const SignupForm = () => {
   const [isFormValid, setIsFormValid] = useState(false)
   const [hasSubmissionError, setHasSubmissionError] = useState(false)
   const [showSuccess, setShowSuccess] = useState(false)
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(()=>{
     setIsFormValid(validateForm())

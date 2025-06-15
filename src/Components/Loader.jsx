@@ -1,5 +1,5 @@
 export const Loader = () =>{
-    return <div>
-        Loading...
-    </div>
-}
+      return (
+      <div className="spinner" />
+  );
+};
