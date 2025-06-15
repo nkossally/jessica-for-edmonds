@@ -4,6 +4,7 @@ import { Input } from "./Input";
 import { donate } from "../requests";
 import { Error } from "./Error";
 import { SuccessDonate } from "./SuccessDonate";
+import { Loader } from "./Loader";
 
 const CARD_TYPES = {
   VISA: "VISA",
@@ -29,13 +30,15 @@ export const DonateForm = () => {
   const [selectedAmountButton, setSelectedAmountButton] = useState("");
   const [errors, setErrors] = useState({});
   const [isFormValid, setIsFormValid] = useState(false);
+  const [hasSubmissionError, setHasSubmissionError] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     setIsFormValid(validateForm());
   }, [formData]);
 
-  useEffect(() => {
-  }, [errors]);
+  useEffect(() => {}, [errors]);
 
   const handleChange = (validationCallback) => (e) => {
     const { name, value } = e.target;
@@ -56,9 +59,18 @@ export const DonateForm = () => {
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
+      setIsLoading(true);
       const resp = await donate(formData);
+      setIsLoading(false);
+      if (!resp) {
+        setHasSubmissionError(true);
+      } else {
+        setShowSuccess(true);
+      }
       console.log("resp", resp);
-    } catch {}
+    } catch {
+      setHasSubmissionError(true);
+    }
   };
 
   const validateForm = () => {
@@ -113,13 +125,13 @@ export const DonateForm = () => {
   };
 
   const validateCvc = (cvccvvInput) => {
-    console.log(cvccvvInput, cvccvvInput.length === 3)
+    console.log(cvccvvInput, cvccvvInput.length === 3);
     if (cvccvvInput && cvccvvInput.length === 3) {
-      console.log("seeting no errors")
+      console.log("seeting no errors");
       setErrors((prev) => ({ ...prev, cvccvv: "" }));
       return true;
     } else {
-      console.log("setting errors")
+      console.log("setting errors");
       setErrors((prev) => ({
         ...prev,
         cvccvv: "Please enter a valid CVC/CVV number.",
@@ -298,7 +310,20 @@ export const DonateForm = () => {
     images = [process.env.PUBLIC_URL + "/" + "discover.svg"];
   }
 
-  console.log("errors", errors)
+  if (hasSubmissionError) {
+    return <Error handleClose={() => setHasSubmissionError(false)}></Error>;
+  }
+
+  if (showSuccess) {
+    return (
+      <SuccessDonate handleClose={() => setShowSuccess(false)}></SuccessDonate>
+    );
+  }
+
+  if (isLoading) {
+    return <Loader />;
+  }
+
   return (
     <form className="donate-form-container" onSubmit={handleSubmit}>
       <div className="custom-amounts-and-error">
