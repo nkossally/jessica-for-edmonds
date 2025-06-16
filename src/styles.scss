@@ -623,21 +623,30 @@ code {
 .panel {
     background: white;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     font-family: $general-font;
+
+    @media (max-width: 500px) {
+        flex-direction: column;
+    }
 }
 
 .panel-two {
     background-color: $light-blue;
 }
 
-.inner-panel {
+.half-panel {
     margin: 20px 40px 20px 40px;
+    width: 50%;
+
+    @media (max-width: 500px) {
+        width: 100%;
+    }
 
 }
 
 .panel-title {
-    color: $american-blue;
+    color: $red-one;
     font-size: 40px;
     margin: 40px 40px;
     font-weight: bold;
