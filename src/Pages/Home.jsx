@@ -2,7 +2,7 @@ import { Carousel } from "../Components/Carousel";
 import { AboutSectionOne } from "../Components/AboutSectionOne";
 import { PanelOne } from "../Components/PanelOne";
 import { PanelTwo } from "../Components/PanelTwo";
-
+import { HeroSection } from "../Components/HeroSection";
 export const Home = () => {
   
   const carouselItems = [
@@ -18,7 +18,7 @@ export const Home = () => {
   return (
       <div>
         {/* <Carousel items={carouselItems}></Carousel> */}
-        <AboutSectionOne/>
+        <HeroSection />
         <PanelOne />
         <PanelTwo />
 
