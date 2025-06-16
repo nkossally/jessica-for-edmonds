@@ -841,40 +841,94 @@ code {
     width: 100vw;
     height: 450px;
     background-color: $blue-four;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.red-name {
+    color: $red-one;
+    font-size: 54px;
+    font-family: font-1;
+    font-weight: 700;
+}
+
+.for {
+    color: white;
+    font-family: font-3;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 0px 10px;
+    font-size: 24px;
+
+}
+
+.hero-row-one {
+    display: flex;
+    flex-direction: row;
+
+}
+
+.hero-text {
+    display: flex;
+    flex-direction: row;
+    font-family: font-3;
+    font-size: 24px;
+
+
+}
+
+.hero-row-two {
+    display: flex;
+    flex-direction: row;
+    font-size: 24px;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-family: font-3;
+
+}
+
+.hero-name{
+    display: flex;
+    flex-direction: row;
+    font-size: 24px;
+    font-weight: 700;
+    font-family: font-3;
+}
+
+.hero-image {
+    display: flex;
+    height: 500px;
+    position: absolute;
+    bottom: 0;
+    left: 100%;
+    @media (max-width: 1000px) {
+    height: 400px;
+        left: 75%;
+
+    }
+    @media (max-width: 500px) {
+        display: none;
+    }
+}
+
+.wave {
+    height: 20px;
+    margin: 20px 0px;
+}
+
+.hero-inner-container{
+    height: 100%;
+    width: fit-content;
+
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     color: white;
     position: relative;
-}
-
-.red-name {
-    color: $red-one;
-    font-size: 36px;
-    font-family: font-1;
-}
-
-.for {
-    color: white;
-    font-family: font-3;
-}
-
-.hero-row-one {
-    display: flex;
-    flex-direction: row;
-}
-
-.hero-image {
-    display: flex;
-    height: 400px;
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    // @media (max-width: 1500px) {
-    // height: 400px;
-    // }
-    @media (max-width: 800px) {
-        display: none;
-    }
 }
