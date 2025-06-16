@@ -51,7 +51,7 @@ export const NavBar = () => {
       <div className="nav-logo-container">
         <img
           className="nav-logo"
-          src={process.env.PUBLIC_URL + "/" + "zohran-logo.svg"}
+          src={process.env.PUBLIC_URL + "/" + "blue-logo.png"}
         />
       </div>
 
