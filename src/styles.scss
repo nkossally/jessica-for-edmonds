@@ -670,7 +670,9 @@ code {
     margin: 0px 40px;
 }
 
-.subscribe-option-input {}
+.subscribe-option-input {
+    margin: 20px 0px;
+}
 
 .amount-buttons-container {
     display: flex;
@@ -776,7 +778,7 @@ code {
     font-family: $general-font;
     font-size: 40px;
     color: $american-blue;
-    margin-top: 30px;
+    margin-top: 80px;
     text-align: center;
     font-weight: 700;
 
