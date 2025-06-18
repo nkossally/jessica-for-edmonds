@@ -29,6 +29,8 @@ $nav-height: 70px;
 $font-1: anton regular;
 $font-2: source serif;
 $font-3: source sans;
+$font-script: cursive;
+
 
 
 input::-webkit-outer-spin-button,
@@ -631,7 +633,7 @@ code {
     flex-direction: row;
     font-family: $general-font;
 
-    @media (max-width: 500px) {
+    @media (max-width: 800px) {
         flex-direction: column;
     }
 }
@@ -641,10 +643,10 @@ code {
 }
 
 .half-panel {
-    margin: 20px 40px 20px 40px;
+    margin: 20px 0px;
     width: 50%;
 
-    @media (max-width: 500px) {
+    @media (max-width: 800px) {
         width: 100%;
     }
 
@@ -689,12 +691,12 @@ code {
     cursor: pointer;
     outline: inherit;
     margin-right: 20px;
-    border: 1px solid gray;
+    border: 2px solid gray;
     border-radius: 5px;
 
     &:hover {
         background-color: $money-green;
-        border: 1px solid $green;
+        border: 2px solid $green;
 
 
     }
@@ -716,7 +718,7 @@ code {
     font: inherit;
     cursor: pointer;
     outline: inherit;
-    border: 1px solid gray;
+    border: 2px solid gray;
     border-radius: 5px;
 
     &:hover {
@@ -725,7 +727,7 @@ code {
 }
 
 .amount-button-selected {
-    border: 1px solid $green;
+    border: 2px solid $green;
 
     background-color: $money-green;
 }
@@ -881,16 +883,16 @@ code {
 
 .for {
     color: white;
-    font-family: font-3;
+    font-family: cursive;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    padding: 0px 10px;
-    font-size: 24px;
+    padding: 0px 18px;
+    font-size: 20px;
 
     @media (max-width: 500px) {
-        font-size: 18px;
+        font-size: 16px;
     }
 
 }
@@ -904,7 +906,7 @@ code {
 .hero-text {
     display: flex;
     flex-direction: row;
-    font-family: font-3;
+    font-family: $font-3;
     font-size: 24px;
 
     @media (max-width: 500px) {
@@ -920,7 +922,7 @@ code {
     font-size: 24px;
     text-transform: uppercase;
     font-weight: 700;
-    font-family: font-3;
+    font-family: $font-3;
 
     @media (max-width: 500px) {
         font-size: 18px;
@@ -933,7 +935,7 @@ code {
     flex-direction: row;
     font-size: 24px;
     font-weight: 700;
-    font-family: font-3;
+    font-family: $font-3;
 
     @media (max-width: 500px) {
         font-size: 18px;
