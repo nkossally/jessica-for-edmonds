@@ -872,8 +872,10 @@ code {
 
 .red-name {
     color: $red-one;
-    font-size: 54px;
+    font-size: 60px;
     font-family: $font-1;
+    letter-spacing: .05em;
+
     font-weight: 700;
 
     @media (max-width: 500px) {
@@ -884,6 +886,7 @@ code {
 .for {
     color: white;
     font-family: cursive;
+    letter-spacing: .02em;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -906,11 +909,12 @@ code {
 .hero-text {
     display: flex;
     flex-direction: row;
-    font-family: $font-3;
-    font-size: 24px;
+    font-family: $font-2;
+    letter-spacing: .02em;
+    font-size: 22px;
 
     @media (max-width: 500px) {
-        font-size: 18px;
+        font-size: 16px;
     }
 
 
@@ -919,10 +923,11 @@ code {
 .hero-row-two {
     display: flex;
     flex-direction: row;
-    font-size: 24px;
+    font-size: 28px;
     text-transform: uppercase;
     font-weight: 700;
-    font-family: $font-3;
+    font-family: $font-2;
+    letter-spacing: .1em;
 
     @media (max-width: 500px) {
         font-size: 18px;
@@ -933,12 +938,13 @@ code {
 .hero-name{
     display: flex;
     flex-direction: row;
-    font-size: 24px;
+    font-size: 22px;
     font-weight: 700;
-    font-family: $font-3;
+    font-family: $font-2;
+    letter-spacing: .1em;
 
     @media (max-width: 500px) {
-        font-size: 18px;
+        font-size: 16px;
     }
 }
 
