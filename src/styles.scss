@@ -26,9 +26,9 @@ $input-width-small: 500px;
 $elect-cta-height: 20px;
 $nav-height: 70px;
 
-$font-1: anton regular;
-$font-2: source serif;
-$font-3: source sans;
+$font-1: "Anton", sans-serif;
+$font-2: "Source Serif 4", serif;
+$font-3: "Source Sans 3", sans-serif;
 $font-script: cursive;
 
 
@@ -873,7 +873,7 @@ code {
 .red-name {
     color: $red-one;
     font-size: 54px;
-    font-family: font-1;
+    font-family: $font-1;
     font-weight: 700;
 
     @media (max-width: 500px) {
